@@ -1,0 +1,125 @@
+<div class="product-page-wrapper" *ngIf="product">
+  <div class="container">
+    <!-- Back Navigation -->
+    <nav class="nav-header">
+       <button class="back-link" routerLink="/">← მთავარზე დაბრუნება</button>
+    </nav>
+
+    <div class="main-content-grid">
+      <!-- Media Gallery Section -->
+      <div class="gallery-column">
+        <div class="image-card">
+          <div class="badge-container" *ngIf="product.price > product.currentPrice">
+            <span class="sale-tag">SALE</span>
+          </div>
+          <!-- აქ product.pictureUrl შევცვალეთ selectedImage-ით -->
+          <img [src]="selectedImage" [alt]="product.name" class="product-main-img">
+        </div>
+
+        <!-- დამატებული სლაიდერის პატარა ფოტოები (Thumbnails) -->
+        <div class="thumbnails-row" *ngIf="product.images && product.images.length > 1">
+          <div class="thumb-box" 
+               *ngFor="let img of product.images" 
+               [class.active]="selectedImage === img.imageUrl"
+               (click)="selectImage(img.imageUrl)">
+            <img [src]="img.imageUrl" [alt]="product.name">
+          </div>
+        </div>
+      </div>
+
+      <!-- Purchase Details Section -->
+      <div class="details-column">
+        <div class="info-header">
+          <span class="category-pill">{{product.categoryName}}</span>
+          <h1 class="product-title">{{product.name}}</h1>
+          
+          <div class="rating-summary">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <span class="review-count">({{reviews.length}} შეფასება)</span>
+          </div>
+        </div>
+
+        <p class="product-description">{{product.description}}</p>
+
+        <div class="pricing-card">
+          <div class="price-wrapper">
+            <span class="price-now">{{product.currentPrice}} ₾</span>
+            <span class="price-before" *ngIf="product.price > product.currentPrice">
+              {{product.price}} ₾
+            </span>
+          </div>
+          
+          <div class="action-buttons">
+            <button class="primary-btn" (click)="addToCart()">
+              <span class="btn-icon">🛒</span> კალათაში დამატება
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <section class="reviews-layout">
+      <div class="reviews-header-block">
+        <h2 class="section-title">მომხმარებლის შეფასებები</h2>
+        <div class="rating-hero" *ngIf="reviews.length > 0">
+          <div class="big-rating">{{product?.averageRating || '0'}}</div>
+          <div class="rating-meta">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <div class="count-text">ეფუძნება {{reviews.length}} რევიუს</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reviews-grid" *ngIf="reviews.length > 0; else noReviews">
+        <div class="review-card" *ngFor="let r of reviews">
+          <div class="card-header">
+            <div class="user-profile">
+              <div class="avatar">{{ (r.userEmail || 'U').charAt(0).toUpperCase() }}</div>
+              <div class="user-details">
+                <span class="user-name">{{ r.userEmail?.split('@')[0] || 'მომხმარებელი' }}</span>
+                <span class="review-date">4 მაისი, 2026</span>
+              </div>
+            </div>
+            <div class="user-rating-pill">⭐ {{r.rating}}</div>
+          </div>
+          <div class="card-body">
+            <p class="comment-text">{{r.comment}}</p>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #noReviews>
+        <div class="empty-state-box">
+          <div class="empty-icon">💬</div>
+          <p>ამ პროდუქტზე შეფასებები ჯერ არ არის.</p>
+          <span>იყავი პირველი და გაგვიზიარე შენი აზრი!</span>
+        </div>
+      </ng-template>
+
+
+      
+<!-- Toast შეტყობინება -->
+<!-- Toast შეტყობინება -->
+<div class="toast-container" 
+     *ngIf="showToast" 
+     (click)="goToCart()" 
+     style="cursor: pointer;">
+  <div class="toast-content">
+    <div class="toast-image-wrapper">
+      <img [src]="currentToastImage" alt="product">
+      <div class="mini-check">✓</div>
+    </div>
+    
+    <div class="message-text">
+      <p class="toast-product-info">{{ toastMessage }}</p>
+      <span class="added-label">კალათაშია (გადადი ნახვაზე)</span>
+    </div>
+  </div>
+  <div class="progress-bar"></div>
+</div>
+    </section>
+
+    
+  </div>
+</div>

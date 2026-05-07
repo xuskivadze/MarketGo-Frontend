@@ -1,0 +1,1317 @@
+:host {
+  /* ძირითადი ფერები - მწვანე თემა */
+  --primary: #27ae60;
+  --primary-dark: #1e8449;
+  --primary-light: #eafaf1;
+  --dark: #2c3e50;
+  --light-bg: #f4f9f6;
+  --white: #ffffff;
+  --text-muted: #7f8c8d;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  --transition: all 0.3s ease;
+
+  display: block;
+  background-color: var(--light-bg);
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  color: var(--dark);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* --- Top Bar --- */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--white);
+  padding: 15px 25px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.search-box input {
+  padding: 10px 18px;
+  border: none; /* ბორდერის მოხსნა */
+  background: #f1f3f2;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 320px;
+  outline: none;
+  transition: var(--transition);
+}
+
+.search-box input:focus {
+  background: #e8f5e9;
+  box-shadow: 0 0 0 2px var(--primary);
+}
+
+/* --- სორტირება (მწვანე, ბორდერის გარეშე) --- */
+.sort-box select {
+  padding: 10px 35px 10px 15px;
+  border-radius: 10px;
+  border: none; /* ბორდერის მოხსნა */
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2327ae60'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 20px;
+}
+
+/* --- Layout Structure --- */
+.main-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 25px;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+  background: var(--white);
+  padding: 20px;
+  border-radius: 12px;
+  height: fit-content;
+  box-shadow: var(--shadow);
+}
+
+.sidebar h3 {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  color: var(--dark);
+  font-weight: 700;
+}
+
+.price-inputs input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: #f1f3f2;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  outline: none;
+}
+
+.apply-btn {
+  width: 100%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.apply-btn:hover { background: var(--primary-dark); }
+
+.reset-btn {
+  width: 100%;
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+/* Category List */
+.category-list button {
+  text-align: left;
+  padding: 10px 15px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.category-list button:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.category-list button.active {
+  background: var(--primary);
+  color: white;
+}
+
+/* --- Products Grid --- */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  border: none; /* ბორდერის მოხსნა */
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.product-info {
+  padding: 15px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.add-to-cart {
+  width: 100%;
+  background: var(--dark);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.add-to-cart:hover {
+  background: var(--primary);
+}
+
+/* --- რესპონსიულობა (მობილური) --- */
+@media (max-width: 900px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .category-list {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 8px;
+    padding-bottom: 10px;
+  }
+
+  .category-list button {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 600px) {
+  .products-grid {
+    grid-template-columns: 1fr 1fr; /* მობილურზე 2 სვეტი */
+    gap: 12px;
+  }
+  
+  .product-info h4 {
+    font-size: 0.9rem;
+  }
+  
+  .price {
+    font-size: 1rem;
+  }
+}
+
+/* მთავარი კონტეინერი */
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ზედა პანელი: ძებნა და სორტირება */
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 15px 25px; /* ოდნავ გავზარდეთ გვერდითა დაშორება */
+  border-radius: 12px;
+  margin-bottom: 25px;
+
+  /* --- განახლებული ჩრდილი --- */
+  /* პირველი ნაწილი აძლევს სიღრმეს, მეორე კი რბილ გაბნევას */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06), 
+              0 4px 10px rgba(0, 0, 0, 0.04);
+   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease; /* სილამაზისთვის */
+}
+
+
+
+.search-box input {
+  padding: 10px 15px;
+  width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.search-box input:focus { border-color: #27ae60; }
+
+.sort-box select {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  cursor: pointer;
+}
+
+/* მთავარი განლაგება (Sidebar + Products) */
+.main-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr; /* გვერდითა პანელი 280პქ, დანარჩენი პროდუქტები */
+  gap: 30px;
+}
+
+/* გვერდითა პანელი */
+.sidebar {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+}
+
+.sidebar h3 {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+.price-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.price-inputs input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.apply-btn {
+  width: 100%;
+  background: #27ae60;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.apply-btn:hover { background: #219150; }
+
+.reset-btn {
+  width: 100%;
+  background: #ffffff;
+  color: #64748b;
+  border: 1.5px solid #e2e8f0;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  gap: 8px;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+}
+
+.reset-btn:hover {
+  background: #fff1f2; /* ძალიან ნაზი წითელი ფონი */
+  color: #e11d48;      /* მკაფიო წითელი ტექსტი */
+  border-color: #fecdd3; /* წითელი ჩარჩო */
+  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.08);
+}
+
+.reset-btn:active {
+  transform: scale(0.98); /* დაჭერისას ოდნავ "პატარავდება" */
+}
+
+/* თუ გინდა იკონკა უფრო ლამაზი იყოს */
+.reset-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.reset-btn:hover svg {
+  transform: rotate(-90deg); /* ჰოვერზე იკონკა ბრუნდება */
+}
+
+/* პროდუქტების გრიდი */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 15px;
+  padding: 15px;
+  text-align: center;
+  position: relative;
+  transition: 0.3s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+/* SALE ბეიჯი */
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #e74c3c;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.cat-name {
+  font-size: 0.8rem;
+  color: #27ae60;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.product-info h4 {
+  margin: 10px 0;
+  font-size: 1rem;
+  color: #2c3e50;
+  height: 30px;
+  overflow: hidden;
+}
+
+.price-row {
+  margin: 15px 0;
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #2c3e50;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #999;
+  margin-left: 10px;
+  font-size: 0.9rem;
+}
+
+.add-to-cart {
+  width: 100%;
+  padding: 12px;
+  background: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.add-to-cart:hover { background: #34495e; }
+
+/* Toast შეტყობინება */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #27ae60;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  z-index: 1000;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+/* მობილური ვერსია */
+@media (max-width: 768px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .top-bar {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .search-box input {
+    width: 100%;
+  }
+  
+  .sidebar {
+    position: static;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* MAIN GRID */
+.main-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 25px;
+}
+
+/* PRODUCTS GRID */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* სათაურის სტილი: ცენტრში და მწვანე ხაზით */
+.category-title {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 30px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.category-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px; /* ხაზის სიგრძე */
+  height: 4px; /* ხაზის სისქე */
+  background-color: var(--primary); /* მწვანე ფერი */
+  border-radius: 2px;
+}
+
+/* ღილაკების ჩამონათვალი ცენტრში */
+.category-list-centered {
+  display: flex;
+  justify-content: center; /* ცენტრირება ჰორიზონტალურად */
+  flex-wrap: wrap; /* თუ ბევრია, ჩამოვიდეს დაბლა */
+  gap: 15px; /* დაშორება ღილაკებს შორის */
+  margin-bottom: 40px;
+  padding: 0 10px;
+}
+
+/* ღილაკის ძირითადი სტილი */
+.cat-btn {
+  padding: 12px 25px;
+  min-width: 120px; /* მინიმალური სიგანე სილამაზისთვის */
+  border: 2px solid transparent;
+  background-color: var(--white);
+  color: var(--dark);
+  border-radius: 50px; /* მომრგვალებული ფორმა */
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 8px 10px 10px rgba(0,0,0,0.05);
+}
+
+/* მაუსის მიტანისას (Hover) */
+.cat-btn:hover {
+  background-color: var(--primary-light);
+  color: var(--primary);
+ 
+}
+
+/* აქტიური კატეგორია (როცა დაჭერილია და რჩება) */
+.cat-btn.active {
+  background-color: var(--primary) !important;
+  color: white !important;
+}
+
+
+.product-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 15px;
+  border: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+  border-color: #007bff;
+}
+
+/* კატეგორიის სახელი */
+.cat-name {
+  color: #007bff;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* პროდუქტის სახელი (მაგ: iPhone 15 Pro) */
+.product-title {
+  margin: 8px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* აღწერა (მაგ: 128GB, Natural Titanium) */
+.product-description {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 15px;
+  height: 38px; /* ფიქსირებული სიმაღლე, რომ ბარათები თანაბარი იყოს */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ფასის სექცია */
+.price-container {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 800;
+  color: #2c3e50;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #a0a0a0;
+  font-size: 14px;
+}
+
+/* კალათის ღილაკი */
+.add-to-cart {
+  margin-top: 15px;
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.add-to-cart:hover {
+  background: #007bff;
+}
+
+/* ბარათს აუცილებლად უნდა ჰქონდეს relative, რომ ბეჯი არ "გაიქცეს" */
+.product-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 15px;
+  border: 1px solid #f0f0f0;
+  transition: all 0.3s ease;
+}
+
+/* SALE ბეჯის სტილი */
+.sale-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: #ff3b30; /* კაშკაშა წითელი Apple-ის სტილში */
+  color: white;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 10px;
+  text-transform: uppercase;
+  z-index: 10;
+  box-shadow: 0 4px 8px rgba(255, 59, 48, 0.3);
+  letter-spacing: 0.5px;
+}
+
+/* თუ გინდა რომ ბეჯი ოდნავ გადახრილი იყოს (უფრო დინამიურია) */
+.sale-badge:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
+/* დანარჩენი სტილები ერთგვაროვნებისთვის */
+.image-wrapper {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+
+
+/* ბარათს აუცილებლად უნდა ჰქონდეს relative, რომ ბეჯი შიგნით დარჩეს */
+.product-card {
+  position: relative;
+  overflow: hidden; /* რომ ბეჯი ბარათის ჩარჩოს არ გასცდეს */
+}
+
+.low-stock-badge {
+  position: absolute;
+  bottom: 12px; /* დაშორება ქვემოდან */
+  right: 12px;  /* დაშორება მარჯვნიდან */
+  background-color: #e74c3c; /* საგანგაშო წითელი ფერი */
+  color: white;
+  padding: 3px 8px;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 4px;
+  text-transform: uppercase;
+  z-index: 5;
+  pointer-events: none; /* რომ ღილაკზე დაჭერას ხელი არ შეუშალოს */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  animation: blink-effect 2s infinite; /* ყურადღების მისაქცევად */
+}
+
+/* ციმციმის ეფექტი */
+@keyframes blink-effect {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+
+.product-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.product-card:hover {
+  transform: translateY(-5px); /* ქარდი ოდნავ იწევა ზემოთ */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08); /* რბილი ჩრდილი */
+}
+
+/* კალათაში დამატების ღილაკის მწვანე ფერი */
+.add-to-cart {
+  background-color: #27ae60; /* შენი მწვანე ფერი */
+  color: white;
+  border: none;
+  cursor: pointer;
+  z-index: 2; /* რომ ღილაკი ყოველთვის ზემოდან იყოს */
+}
+
+
+/* მთავარი კონტეინერი, რომელიც ფილტრს და პროდუქტებს ყოფს */
+.main-layout {
+  display: flex;
+  gap: 30px;
+  padding: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+}
+
+/* პროდუქტების ბადე: 1 ხაზზე 3 ცალი */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 ტოლი სვეტი */
+  gap: 25px;
+  flex: 1;
+}
+
+/* ქარდის დიზაინი */
+.product-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #f1f5f9; /* უფრო ნაზი ჩარჩო (Slate-100) */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+  border-color: #e2e8f0; /* ჩარჩო არ ქრება, უბრალოდ ფერს იცვლის */
+  
+}
+
+/* სურათის სექცია */
+.image-wrapper {
+  width: 100%;
+  height: 200px;
+  background: #fdfdfd;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 15px 10px 15px;
+}
+
+.product-card:hover .image-wrapper img {
+  transform: scale(1.07); /* 12% გადიდება საკმარისია დახვეწილობისთვის */
+}
+
+.image-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.02); /* ძალიან მკრთალი ფენა */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.product-card:hover .image-wrapper::after {
+  opacity: 1;
+}
+
+.image-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* ინარჩუნებს ტექნიკის პროპორციებს */
+ transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); /* "Back" ეფექტით გადიდება */
+  will-change: transform; /* ოპტიმიზაცია გლუვი ანიმაციისთვის */
+}
+.product-card:hover img{
+transform: scale(1.15); /* სურათი დიდდება 15%-ით */
+}
+
+/* ინფორმაციის ბლოკი */
+.product-info {
+  padding: 0px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.cat-name {
+  font-size: 12px;
+  color: #27ae60; /* თქვენი საყვარელი მწვანე */
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.product-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+  color: #2d3436;
+  white-space: nowrap;      /* ტექსტი არ გადავიდეს ახალ ხაზზე */
+  overflow: hidden;         /* რაც არ ეტევა, დაიმალოს */
+  text-overflow: ellipsis;  /* დაემატოს სამი წერტილი (...) */
+  display: block;
+}
+
+
+.product-description {
+  font-size: 14px;
+  color: #636e72;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* ტექსტს ჭრის ორ ხაზზე */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ფასები */
+.price-row {
+  margin-top: auto;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 800;
+  color: #2d3436;
+}
+
+.old-price {
+  font-size: 14px;
+  color: #b2bec3;
+  text-decoration: line-through;
+  margin-left: 10px;
+}
+
+
+/* ღილაკი - პროფესიონალური მწვანე */
+.add-to-cart {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.add-to-cart:hover {
+  background-color: #219150;
+}
+
+/* SALE ბეჯი */
+.badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: #e74c3c;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 10;
+}
+
+/* --- RESPONSIBILITY (რესპონსივი) --- */
+
+/* ტაბლეტებისთვის: 2 ქარდი */
+@media (max-width: 1024px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* მობილურებისთვის: 1 ქარდი და ფილტრის განლაგება */
+@media (max-width: 768px) {
+  .main-layout {
+    flex-direction: column;
+    padding: 15px;
+  }
+  
+  .sidebar {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .image-wrapper {
+    height: 200px;
+  }
+}
+
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icon-circle {
+  background: #27ae60;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.status {
+  font-weight: bold;
+  color: #27ae60;
+  display: block;
+}
+
+.message-text p {
+  margin: 0;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.progress-bar {
+  height: 3px;
+  background: #27ae60;
+  margin-top: 10px;
+  width: 100%;
+  animation: shrink 2.5s linear;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes shrink {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+
+.toast-image-wrapper {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0;
+}
+
+.toast-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #27ae60;
+}
+
+.mini-check {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #27ae60;
+  color: white;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.toast-container {
+  z-index: 9999;
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  background: white;
+  padding: 12px 20px;
+  border-radius: 12px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  animation: slideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* დანარჩენი სტილები (progress-bar, animation) იგივე რჩება */
+
+.price-container {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.low-stock-badge {
+  background: #f39c12; /* ნარინჯისფერი უფრო უხდება მარაგის ამოწურვას */
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+
+/* მობილური ვერსიისთვის (768px-ზე პატარა ეკრანებისთვის) */
+@media (max-width: 768px) {
+  .toast-container {
+    top: 80px;         /* ცოტათი ზემოთ ავიყვანოთ, რომ ნავბარს მოჰყვეს */
+    right: 10px;       /* მარჯვენა კიდიდან მინიმალური დაშორება */
+    left: auto;        /* მარცხნიდან დაშორება ავტომატურია */
+    width: auto;       /* სიგანე თავად განსაზღვროს შიგთავსის მიხედვით */
+    max-width: 85%;    /* ეკრანის 85%-ზე მეტი არ დაიკავოს */
+    padding: 10px 15px; /* ოდნავ დავაპატარაოთ პედინგი */
+    
+    /* რომ უფრო კომპაქტური იყოს მობილურზე */
+    min-width: 200px; 
+  }
+
+  .toast-product-info {
+    max-width: 130px;  /* ტექსტი უფრო ადრე "მოიჭრას", რომ ჩარჩოდან არ გავარდეს */
+    font-size: 13px;
+  }
+}
+
+
+
+.toast-container {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  z-index: 99999 !important;
+  background: #ffffff;
+  padding: 12px 18px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  border-left: 4px solid #27ae60;
+  min-width: 280px;
+  pointer-events: auto !important; /* აუცილებელია კლიკისთვის */
+  transition: all 0.2s ease;
+  animation: toastIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toast-container:hover {
+  transform: translateY(-3px);
+  background-color: #fcfcfc;
+}
+
+.view-cart-link {
+  font-size: 10px;
+  color: #27ae60;
+  text-decoration: underline;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+/* დანარჩენი სტილები (toast-image-wrapper, progress-bar და ა.შ.) 
+   გადმოიტანე product-details-იდან */
+
+
+/* --- TOAST MAIN CONTAINER --- */
+.toast-container {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  z-index: 999999 !important;
+  
+  /* ზომები დესკტოპზე */
+  width: 320px;
+  min-height: 75px;
+  max-height: 90px;
+  padding: 12px 16px;
+  
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+  border-left: 5px solid #27ae60;
+  
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  cursor: pointer;
+  pointer-events: auto !important;
+  
+  /* შემოსვლის ანიმაცია */
+  animation: toastSlideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  transition: transform 0.2s ease;
+}
+
+.toast-container:hover {
+  transform: translateY(-3px);
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+/* სურათის ზომა */
+.toast-image-wrapper {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  flex-shrink: 0; /* რომ არ მოიჭყლიტოს */
+}
+
+.toast-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.mini-check {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #27ae60;
+  color: white;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+}
+
+/* ტექსტის ბლოკი */
+.message-text {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.status {
+  font-size: 13px;
+  color: #27ae60;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.toast-product-info {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* გრძელ სახელს სამ წერტილს დაუსვამს */
+}
+
+/* პროგრეს ბარი */
+.progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: #27ae60;
+  width: 100%;
+  transform-origin: left;
+  animation: progressLinear 2.5s linear forwards;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes toastSlideIn {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes progressLinear {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+
+/* --- MOBILE RESPONSIVE (აქ მოვხსენით სიგრძის პრობლემა) --- */
+@media (max-width: 576px) {
+  .toast-container {
+    width: auto !important; /* სიგანე ავტომატური */
+   right: 15px !important;     /* დაშორება მარჯვენა კიდიდან */
+    left: auto !important;
+    top: 85px !important;
+    
+    /* სიმაღლე მკაცრად შეზღუდული */
+    min-height: 65px !important;
+    max-height: 75px !important;
+    padding: 8px 12px !important;
+    border-radius: 10px !important;
+  }
+
+  .toast-image-wrapper {
+    width: 42px !important; /* ოდნავ დავაპატარავეთ */
+    height: 42px !important;
+  }
+
+  .toast-product-info {
+    max-width: 180px !important; /* ტექსტი რომ არ გაიწელოს */
+    font-size: 12px !important;
+  }
+}

@@ -1,0 +1,89 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom fixed-top py-2">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" routerLink="/" (click)="scrollToTop()">
+      <div class="logo-box me-2">MG</div>
+      <span class="logo-text">MarketGo</span>
+    </a>
+
+    <!-- ჰამბურგერ ღილაკი Angular-ის კლიკით -->
+    <button class="navbar-toggler" type="button" (click)="toggleMenu()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- მენიუს ნაწილი - [class.show] აკონტროლებს გამოჩენას -->
+    <div class="collapse navbar-collapse" [class.show]="!isMenuCollapsed" id="navContent">
+      <div class="mx-auto w-100 px-lg-5 my-3 my-lg-0" style="max-width: 600px;">
+        <input type="text" 
+        id="navbarSearch"
+       class="search-input-clean" 
+       placeholder="მოძებნე MarketGo-ზე..."
+       (input)="onSearch($event)"
+       (keyup.enter)="onEnterSearch()"> <!-- დავამატეთ ეს ხაზი -->
+      </div>
+
+      <div class="navbar-nav align-items-center gap-3">
+  <a routerLink="/login" class="btn-auth">შესვლა</a>
+  <a routerLink="/register" class="btn-reg">რეგისტრაცია</a>
+  
+  <!-- კალათის ღილაკი -->
+  <a routerLink="/cart" class="cart-btn">
+    <div class="cart-icon-wrapper">
+      <i class="bi bi-cart3"></i>
+      <!-- ციფრი გამოჩნდება მხოლოდ მაშინ, როცა კალათაში რამეა (> 0) -->
+    <span class="cart-count">
+      {{ (apiService.cartCount$ | async) || 0 }}
+    </span>
+    </div>
+  </a>
+
+</div>
+    </div>
+  </div>
+</nav>
+
+
+
+<section class="hero-section">
+  <div class="container hero-container-tight">
+    <div class="row align-items-center justify-content-center g-lg-4">
+      
+      <div class="col-lg-7 text-center text-lg-start pe-lg-4">
+        <span class="badge rounded-pill bg-soft-success text-success px-3 py-2 mb-3 fw-bold">
+          <i class="bi bi-stars me-1"></i> ახალი კოლექცია უკვე აქ არის
+        </span>
+        <h1 class="main-title fw-bold mb-3 text-dark">
+          ყველაფერი რაც გჭირდება <br> 
+          <span class="text-green">MarketGo-ზეა</span>
+        </h1>
+        <p class="subtitle text-muted mb-4">
+          MarketGo - შენი სანდო პარტნიორი ონლაინ შოპინგში. <br>
+          აღმოაჩინე ათასობით პროდუქტი საუკეთესო ფასად.
+        </p>
+        <div class="d-flex flex-column flex-md-row gap-3 justify-content-center justify-content-lg-start">
+          <button class="btn btn-hero-primary px-4 py-3" (click)="scrollToProducts()">შოპინგის დაწყება</button>
+          <button class="btn btn-hero-outline px-4 py-3" (click)="showSales()">
+                  ნახე ფასდაკლებები
+          </button>
+        </div>
+      </div>
+
+      <div class="col-lg-5 d-none d-lg-block">
+        <div class="hero-image-container">
+          <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&q=80&w=800" 
+               class="hero-main-img" alt="MarketGo Shopping">
+          
+          <div class="floating-card badge-top">
+            <i class="bi bi-patch-check-fill text-success"></i>
+            <span>100% ხარისხი</span>
+          </div>
+          
+          <div class="floating-card badge-bottom">
+            <i class="bi bi-truck text-primary"></i>
+            <span>სწრაფი მიწოდება</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

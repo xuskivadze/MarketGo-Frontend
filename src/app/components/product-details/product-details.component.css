@@ -1,0 +1,687 @@
+:host {
+  --primary: #27ae60;
+  --primary-dark: #219150;
+  --accent: #e74c3c;
+  --text-main: #2c3e50;
+  --text-muted: #64748b;
+  --bg-soft: #f8fafc;
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+
+  display: block;
+  background-color: var(--bg-soft);
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 60px;
+}
+
+
+
+/* --- Layout Grid --- */
+.main-content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+@media (min-width: 992px) {
+  .main-content-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+  }
+}
+
+/* --- Product Image Card --- */
+.image-card {
+  position: relative;
+  background: white;
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  justify-content: center;
+}
+
+.product-main-img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.sale-tag {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: var(--accent);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+/* --- Pricing Card --- */
+.pricing-card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid #f1f5f9;
+}
+
+.price-now {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.primary-btn {
+  width: 100%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 18px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+/* --- Reviews Section --- */
+.reviews-layout {
+  margin-top: 80px;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 60px;
+}
+
+.reviews-header-block {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+  .reviews-header-block {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.rating-hero {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: white;
+  padding: 15px 25px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.big-rating {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #f1c40f;
+}
+
+/* --- Review Cards Grid --- */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 25px;
+}
+
+@media (min-width: 768px) {
+  .reviews-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.review-card {
+  background: white;
+  padding: 25px;
+  border-radius: 18px;
+  border: 1px solid #f1f5f9;
+  transition: transform 0.2s;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.user-profile {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.avatar {
+  width: 45px;
+  height: 45px;
+  background: #f0fdf4;
+  color: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  border: 2px solid #dcfce7;
+}
+
+.user-name {
+  display: block;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-main);
+}
+
+.review-date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.user-rating-pill {
+  background: #fef9c3;
+  color: #a16207;
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.comment-text {
+  color: #475569;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* --- Empty State --- */
+.empty-state-box {
+  text-align: center;
+  padding: 60px;
+  background: white;
+  border-radius: 24px;
+  border: 2px dashed #e2e8f0;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+
+
+
+.nav-header {
+  padding: 20px 0;
+}
+
+.back-btn {
+  background: white;
+  border: 1px solid #e2e8f0;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.back-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Main Grid Layout */
+.main-content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+@media (min-width: 992px) {
+  .main-content-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+}
+
+/* Image Section */
+.image-card {
+  position: relative;
+  background: white;
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.product-main-img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-card:hover .product-main-img {
+  transform: scale(1.03);
+}
+
+.sale-tag {
+  background: var(--accent);
+  color: white;
+  padding: 6px 18px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+.sale-tag:hover{
+  background: var(--accent);
+}
+
+/* Info Section */
+.info-header .category-pill {
+  display: inline-block;
+  background: #e8f5e9;
+  color: var(--primary);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.product-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.rating-summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.review-count {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.product-description {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: 35px;
+}
+
+/* Pricing & Action */
+.pricing-card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-sm);
+}
+
+.price-wrapper {
+  display: flex;
+  align-items: baseline;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.price-now {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.price-before {
+  text-decoration: line-through;
+  color: #cbd5e1;
+  font-size: 1.3rem;
+}
+
+.primary-btn {
+  width: 100%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 18px;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.primary-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(39, 174, 96, 0.2);
+}
+
+
+
+/* უკან გამოსასვლელი ღილაკი */
+
+.back-link {
+
+  background: none;
+
+  border: none;
+
+  color: #666;
+
+  font-size: 1rem;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 30px;
+
+  transition: color 0.3s;
+
+}
+
+
+
+.back-link:hover {
+
+  color: #27ae60;
+
+}
+
+
+
+/* მთავარი ბლოკი */
+
+.product-grid {
+
+  display: grid;
+
+  grid-template-columns: 1fr 1.2fr;
+
+  gap: 60px;
+
+  background: white;
+
+  padding: 40px;
+
+  border-radius: 20px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+
+  margin-bottom: 50px;
+
+}
+
+
+
+.thumbnails-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.thumb-box {
+  width: 70px;
+  height: 70px;
+  border: 2px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.thumb-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* რომ ფოტო არ გაიწელოს */
+}
+
+.thumb-box:hover {
+  border-color: #ccc;
+  transform: translateY(-2px);
+}
+
+.thumb-box.active {
+  border-color: #3498db; /* შენი ბრენდის ფერი რაც არის */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* დავარეგულიროთ მთავარი ფოტო, რომ ყოველთვის კარგად ჩანდეს */
+.product-main-img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+}
+
+
+.carousel-inner {
+    background-color: #fff;
+    border: 1px solid #eee;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 2rem;
+    height: 2rem;
+    background-size: 50%;
+}
+
+.thumb-box img:hover {
+    border-color: #007bff;
+    opacity: 0.8;
+}
+
+/* რომ სურათი არ გაიწელოს არაპროპორციულად */
+.object-fit-contain {
+    object-fit: contain !important;
+}
+
+.details-column{
+    margin-top: 70px;
+}
+
+
+
+/* --- 1. SALE ბეჯის საწყისი სტილი და ტრანზიცია --- */
+.sale-tag {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: var(--accent);
+  color: white;
+  padding: 6px 18px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  z-index: 10;
+  
+  /* --- დაამატეთ ეს ხაზები --- */
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* რბილი გადიდების ეფექტი */
+  transform: scale(1); /* საწყისი ზომა */
+  will-change: transform; /* ოპტიმიზაცია */
+  pointer-events: none; /* რომ მაუსმა ბეჯში "გაიაროს" */
+}
+
+/* --- 2. ეფექტი: როცა მაუსს მიიტანთ ქარდზე (image-card) --- */
+.image-card:hover .sale-tag {
+  transform: scale(1.07); /* ბეჯი დიდდება 15%-ით */
+}
+
+/* --- 3. (გამორთეთ) წაშალეთ ან დააკომენტარეთ სურათის გადიდება --- */
+/* ჩვენ აღარ გვინდა, რომ სურათი დიდდებოდეს, ამიტომ ეს სტილი აღარ გვჭირდება: */
+/*
+.image-card:hover .product-main-img {
+  transform: scale(1.03); 
+}
+*/
+
+/* --- TOAST NOTIFICATION STYLES --- */
+.toast-container {
+  z-index: 10000 !important;
+  position: fixed;
+  pointer-events: auto !important;
+  top: 100px;
+  right: 20px;
+  background: #ffffff;
+  padding: 10px 16px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  border-left: 4px solid #27ae60;
+  display: flex;
+  flex-direction: column;
+  min-width: 260px;
+  /* შემოსვლის ანიმაცია */
+  animation: toastIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.toast-image-wrapper {
+  position: relative;
+  width: 45px;  /* ზუსტად ისეთი ზომა, როგორიც ფილტრებში გვაქვს */
+  height: 45px;
+  flex-shrink: 0;
+}
+
+.toast-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #f0f0f0;
+}
+
+.mini-check {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #27ae60;
+  color: white;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.message-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.toast-product-info {
+  margin: 0;
+  font-weight: 700;
+  color: #333;
+  font-size: 13px;
+  max-width: 170px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* თუ სახელი გრძელია, დააწერს სამ წერტილს */
+}
+
+.added-label {
+  font-size: 12px;
+  color: #27ae60;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+/* პროგრეს ბარი ქვემოთ */
+.progress-bar {
+  height: 3px;
+  background: #27ae60;
+  margin-top: 8px;
+  width: 100%;
+  border-radius: 2px;
+  animation: shrinkBar 2.5s linear forwards;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes toastIn {
+  from { transform: translateX(110%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes shrinkBar {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
+  .toast-container {
+    top: 85px;       /* მობილურზე ოდნავ მაღლა */
+    right: 10px;     /* მარჯვენა კიდეზე მიკვრა */
+    left: auto;      /* რომ მარცხნიდან არ დაიფაროს ტექსტი */
+    max-width: 88%;
+    min-width: 220px;
+    padding: 8px 12px;
+  }
+  
+  .toast-product-info {
+    max-width: 140px; /* მობილურზე უფრო მოკლე ტექსტი */
+    font-size: 12px;
+  }
+
+  .toast-image-wrapper {
+    width: 40px;      /* ოდნავ პატარა ფოტო მობილურზე */
+    height: 40px;
+  }
+}
+

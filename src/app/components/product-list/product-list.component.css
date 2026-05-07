@@ -1,0 +1,36 @@
+.filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 15px 25px;
+  border-radius: 15px;
+  border: 1px solid #f1f5f9;
+  margin-bottom: 30px;
+}
+
+.filter-group {
+  display: flex;
+  gap: 15px;
+}
+
+.filter-group input, .filter-group select {
+  padding: 10px 15px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  outline: none;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+.filter-group input:focus, .filter-group select:focus {
+  border-color: #2ecc71;
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.1);
+}
+
+/* პროდუქტების გრიდი */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 25px;
+}

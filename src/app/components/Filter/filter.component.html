@@ -1,0 +1,130 @@
+<div class="container">
+  <!-- კატეგორიების სექცია -->
+ <div class="category-wrapper">
+  <!-- სათაური ცენტრში ხაზით -->
+  <h3 class="category-title">კატეგორიები</h3>
+  
+  <!-- ღილაკების კონტეინერი ცენტრისთვის -->
+  <div class="category-list-centered">
+    <button class="cat-btn" 
+            [class.active]="filters.categoryId === 0" 
+            (click)="selectCategory(0)">
+      ყველა
+    </button>
+    
+    <button *ngFor="let cat of categories" 
+            class="cat-btn"
+            [class.active]="filters.categoryId === cat.id"
+            (click)="selectCategory(cat.id)">
+      {{ cat.name }}
+    </button>
+  </div>
+</div>
+
+  <!-- ზედა პანელი: ძებნა და სორტირება -->
+  <div class="top-bar">
+    <div class="search-box" id="products-section">
+      <input type="text" [(ngModel)]="filters.search" (input)="applyFilters()" placeholder="მოძებნე პროდუქტი...">
+    </div>
+    
+    <div class="sort-box">
+      <select [(ngModel)]="filters.sort" (change)="applyFilters()">
+        <option value="name">სახელით (A-Z)</option>
+        <option value="priceAsc">ფასი: ზრდადობით</option>
+        <option value="priceDesc">ფასი: კლებადობით</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="main-layout">
+    <!-- გვერდითა პანელი: მხოლოდ ფასის ფილტრი -->
+    <aside class="sidebar">
+      <h3>ფასის ფილტრი</h3>
+      <div class="price-inputs">
+        <input type="number" [(ngModel)]="filters.minPrice" placeholder="Min ₾">
+        <input type="number" [(ngModel)]="filters.maxPrice" placeholder="Max ₾">
+      </div>
+      <button class="apply-btn" (click)="applyFilters()">გაფილტვრა</button>
+      <button class="reset-btn" (click)="reset()">გასუფთავება</button>
+    </aside>
+
+    <!-- პროდუქტების სექცია -->
+ <!-- პროდუქტების სექცია -->
+<section class="products-grid" >
+  
+  <!-- [routerLink] გადაიყვანს მომხმარებელს დეტალურ გვერდზე -->
+  <!-- style="cursor: pointer;" საჭიროა, რომ მომხმარებელმა მიხვდეს, რომ ქარდი კლიკებადია -->
+  <div class="product-card" 
+       *ngFor="let item of products" 
+       [routerLink]="['/product-details', item.id]" 
+       style="cursor: pointer;">
+
+    <!-- SALE ბეჯი -->
+    <div class="badge" *ngIf="item.currentPrice < item.price">SALE</div>
+    
+    <!-- პროდუქტის სურათი -->
+    <div class="image-wrapper">
+      <img [src]="item.pictureUrl || 'https://placehold.co/400x400?text=' + item.name" [alt]="item.name">
+    </div>
+    
+    <div class="product-info">
+      <!-- კატეგორია -->
+      <span class="cat-name">{{item.categoryName}}</span>
+      
+      <!-- სახელი -->
+      <h4 class="product-title">{{item.name}}</h4>
+      
+      <!-- აღწერა -->
+      <p class="product-description">{{item.description}}</p>
+      
+      <!-- ფასი -->
+      <div class="price-row">
+        <div class="price-container">
+          <span class="price">{{item.currentPrice}} ₾</span>
+          <span class="old-price" *ngIf="item.currentPrice < item.price">{{item.price}} ₾</span>
+        </div>
+      </div>
+      
+      <!-- ღილაკი: $event.stopPropagation() აჩერებს გადამისამართებას, როცა მხოლოდ კალათაში გინდა დამატება -->
+      <button class="add-to-cart" (click)="$event.stopPropagation(); addtoCart(item)">
+      🛒 კალათაში
+    </button>
+
+      <div *ngIf="isLowStock(item.id)" class="low-stock-badge">
+        Expires
+      </div>
+    </div>
+  </div>
+
+  <!-- თუ პროდუქტი არ მოიძებნა -->
+  <div class="no-results" *ngIf="products.length === 0">
+    <div class="no-results-content">
+      <p>პროდუქტები ვერ მოიძებნა.</p>
+    </div>
+  </div>
+</section>
+
+  </div>
+</div>
+
+
+
+
+<div class="toast-container" 
+     *ngIf="showToast" 
+     (mousedown)="goToCart()" 
+     style="cursor: pointer !important;">
+  <div class="toast-content">
+    <div class="toast-image-wrapper">
+      <img [src]="currentToastImage" alt="product">
+      <div class="mini-check">✓</div>
+    </div>
+    
+    <div class="message-text">
+      <span class="status">დაემატა კალათაში</span>
+      <p class="toast-product-info">{{ toastMessage }}</p>
+      <span class="view-cart-link">გადადი ნახვაზე</span>
+    </div>
+  </div>
+  <div class="progress-bar"></div>
+</div>

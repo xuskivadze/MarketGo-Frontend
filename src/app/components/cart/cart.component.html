@@ -1,0 +1,118 @@
+<div class="shopnet-container py-4">
+  <div class="container">
+    <!-- Header -->
+    <div class="cart-header-card d-flex justify-content-between align-items-center mb-5">
+      <div class="title-area">
+        <h1 class="fw-bold m-0"><i class="bi bi-cart3 color-green me-2"></i>კალათა</h1>
+        <p class="text-count m-0" *ngIf="cartData?.items?.length > 0">ნივთი ({{cartData.items.length}})</p>
+      </div>
+      <div class="header-btns">
+        <button type="button" class="btn btn-outline-danger me-2 px-4 fw-bold" 
+                *ngIf="cartData?.items?.length > 0" (click)="clearCart()">
+          <i class="bi bi-trash-fill me-1"></i> დაცლა
+        </button>
+        <button type="button" class="btn btn-light shadow-sm px-4 fw-bold" routerLink="/">
+          <i class="bi bi-arrow-left me-1"></i> უკან
+        </button>
+      </div>
+    </div>
+
+    <!-- Cart Content -->
+    <div class="row g-4" *ngIf="!isLoading && cartData?.items?.length > 0">
+      <!-- Items List -->
+      <div class="col-lg-8">
+        <div class="item-card shadow-sm mb-3 animate-product-card" *ngFor="let item of cartData.items">
+          <div class="row g-0 align-items-center">
+            
+            <!-- Product Image -->
+            <!-- Product Image -->
+
+         
+<div class="col-4 col-md-2 p-3">
+  <div class="img-box d-flex align-items-center justify-content-center position-relative">
+    <span class="badge-sale" *ngIf="item.salePrice > 0">SALE</span>
+    
+    <img [src]="item.pictureUrl" 
+         class="img-fluid rounded-3 shadow-sm" 
+         [alt]="item.productName"
+         (error)="handleImageError($event)"> 
+  </div>
+</div>
+            
+            <!-- Product Info -->
+            <div class="col-8 col-md-5 px-3">
+              <h5 class="fw-bold mb-1 text-truncate">{{ item.productName }}</h5>
+              <p class="text-muted-brand mb-0 text-uppercase small">{{ item.brand || 'Premium' }}</p>
+            </div>
+
+            <!-- Controls & Price -->
+         <div class="col-12 col-md-5 p-3 bg-light-end">
+  <div class="d-flex justify-content-between align-items-center cart-controls-wrapper">
+    
+    <div class="modern-qty">
+                  <button type="button" (click)="updateQuantity(item, -1)" [disabled]="item.quantity <= 1">
+                    <i class="bi bi-dash"></i>
+                  </button>
+                  <span class="qty-num">{{ item.quantity }}</span>
+                  <button type="button" (click)="updateQuantity(item, 1)">
+                    <i class="bi bi-plus"></i>
+                  </button>
+                </div>
+
+   <div class="price-display text-center flex-grow-1 d-flex flex-column align-items-center">
+                  <ng-container *ngIf="item.salePrice > 0; else regularPrice">
+                    <span class="old-price-cart">{{ item.price * item.quantity | number }} ₾</span>
+                    <span class="price-tag-sale">{{ item.salePrice * item.quantity | number }} ₾</span>
+                  </ng-container>
+  
+  <ng-template #regularPrice>
+                    <span class="price-tag">{{ item.price * item.quantity | number }} ₾</span>
+                  </ng-template>
+                </div>
+    
+    <button type="button" (click)="$event.preventDefault(); $event.stopPropagation(); deleteItem(item.id)" class="btn-remove-red">
+      <i class="bi bi-x-lg"></i>
+    </button>
+
+  </div>
+</div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary Sidebar -->
+      <div class="col-lg-4">
+        <div class="summary-sticky shadow-lg">
+          <h4 class="fw-bold mb-4">შეკვეთის დეტალები</h4>
+          <div class="summary-row d-flex justify-content-between mb-3">
+            <span>პროდუქტები</span>
+            <span>{{cartData.items.length}}</span>
+          </div>
+          <div class="summary-row d-flex justify-content-between mb-3">
+            <span>მიწოდება</span>
+            <span class="text-success fw-bold">უფასო</span>
+          </div>
+          <hr class="my-4 opacity-10">
+          <div class="summary-row d-flex justify-content-between align-items-center mb-4">
+            <span class="h5 fw-bold">სულ:</span>
+            <span class="h3 fw-bold color-green">{{ calculateTotal() | number }} ₾</span>
+          </div>
+          <button type="button" class="btn btn-success-modern w-100 py-3 shadow" (click)="checkout()">
+            ყიდვის გაფორმება
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    
+
+    <!-- Empty Cart -->
+    <div *ngIf="!isLoading && cartData?.items?.length === 0" class="empty-cart-card text-center animate-in">
+      <img src="https://cdn-icons-png.flaticon.com/512/11329/11329060.png" class="empty-img mb-4">
+      <h2 class="fw-bold">თქვენი კალათა ცარიელია</h2>
+      <button class="btn btn-success-modern px-5 py-3 mt-3" routerLink="/">დაიწყე შოპინგი</button>
+    </div>
+  </div>
+</div>

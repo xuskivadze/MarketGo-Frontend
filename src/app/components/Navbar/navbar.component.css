@@ -1,0 +1,328 @@
+/* --- 1. ნავბარის და ძებნის სტილები --- */
+.logo-box {
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%) !important;
+  color: white !important;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-weight: 800;
+}
+
+.logo-text {
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: #1e293b;
+  margin-left: 5px;
+}
+
+/* ძიების ველი - გასწორებული */
+.search-input-clean {
+  width: 100%;
+  padding: 12px 24px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #f8fafc;
+  outline: none;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+}
+
+.search-input-clean:focus {
+  border-color: #2ecc71;
+  background: white;
+  box-shadow: 0 4px 15px rgba(46, 204, 113, 0.08);
+}
+
+/* ავტორიზაციის ღილაკები */
+.btn-auth {
+  color: #64748b;
+  text-decoration: none !important;
+  font-weight: 600;
+  padding: 8px 18px;
+  transition: 0.3s;
+}
+
+.btn-auth:hover {
+  color: #2ecc71;
+}
+
+.btn-reg {
+  background-color: #2ecc71 !important;
+  color: white !important;
+  text-decoration: none !important;
+  padding: 10px 26px;
+  border-radius: 10px;
+  font-weight: 600;
+  border: none;
+  transition: 0.3s ease;
+  display: inline-block;
+}
+
+.btn-reg:hover {
+  background-color: #27ae60 !important;
+  box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+}
+
+/* კალათა - ორიგინალი ვიზუალით */
+.cart-btn {
+  background: #f1f5f9;
+  color: #1e293b;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+  position: relative;
+  transition: 0.3s;
+}
+
+.navbar-brand{
+  cursor: pointer;
+}
+
+.cart-btn:hover {
+  background: white;
+  color: #2ecc71;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.cart-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ef4444;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+
+
+/* --- 1. ნავბარი და ძებნა (უცვლელი, სტაბილური) --- */
+.logo-box {
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%) !important;
+  color: white !important; width: 42px; height: 42px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 12px; font-weight: 800;
+}
+
+.search-input-clean {
+  width: 100%; padding: 11px 22px; border: 1px solid #e2e8f0;
+  border-radius: 14px; background: #f8fafc; outline: none; transition: 0.3s;
+}
+
+
+/* მობილურზე ელემენტების გასწორება */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  }
+
+  .navbar-nav {
+    flex-direction: column; /* ღილაკები ჩამწკრივდეს ერთმანეთის ქვეშ */
+    width: 100%;
+    text-align: center;
+  }
+
+  .btn-reg {
+    width: 100%; /* რეგისტრაციის ღილაკი გაიწელოს */
+    margin-bottom: 10px;
+  }
+
+  .cart-btn {
+    margin: 10px auto; /* კალათა გაცენტრდეს */
+  }
+}
+
+/* ლოგოს ტექსტის ზომა მობილურზე რომ არ გაიჭიმოს */
+@media (max-width: 400px) {
+  .logo-text {
+    font-size: 1.2rem;
+  }
+}
+
+
+
+
+
+/* --- 2. Hero (ბანერის) სექცია --- */
+.hero-section { 
+  margin-top: 25px;
+  padding: 70px 0; 
+  background: radial-gradient(circle at 10% 50%, #f0fff4 0%, #ffffff 50%);
+  display: flex;
+  align-items: center;
+}
+
+.main-title {
+  font-size: 2.9rem;
+  font-weight: 300;
+  line-height: 1.3;
+  color: #1e293b;
+ 
+}
+
+.text-green { color: #2ecc71 !important; }
+
+/* --- 3. განიერი მართკუთხა ფოტო --- */
+.hero-image-container {
+  position: relative;
+  width: 100%;
+  max-width: 550px; /* სიგრძეში გავზარდეთ */
+  margin: 0 auto;
+  animation: mainImgFloat 6s ease-in-out infinite;
+  border-radius: 25px;
+  box-shadow: 10px 8px 15px;
+}
+
+.hero-main-img {
+  width: 100%;
+  height: 280px; /* სიმაღლეში დავაპატარავეთ მართკუთხა ფორმისთვის */
+  object-fit: cover;
+  border-radius: 25px;
+  box-shadow: 5px 15px 30px rgba(0,0,0,0.1);
+
+}
+
+/* მცურავი წარწერები (პოზიციები გასწორებულია ახალ ფორმაზე) */
+.floating-card {
+  position: absolute;
+  background: white;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.badge-top {
+  top: -10px;
+  right: 10px;
+  animation: badgeFloat1 4s ease-in-out infinite;
+}
+
+.badge-bottom {
+  bottom: -10px;
+  left: 10px;
+  animation: badgeFloat2 5s ease-in-out infinite;
+}
+
+/* --- 4. დახვეწილი და პროფესიონალური ღილაკები --- */
+
+/* მთავარი ღილაკი (Primary) */
+.btn-hero-primary {
+  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%) !important;
+  color: white !important;
+  padding: 12px 28px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 14px 0 rgba(39, 174, 96, 0.3); /* მწვანე ჩრდილი სიღრმისთვის */
+}
+
+.btn-hero-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+  filter: brightness(1.05); /* ოდნავ ანათებს ჰოვერზე */
+}
+
+/* მეორადი ღილაკი (Outline/White) */
+.btn-hero-outline {
+  background: #ffffff;
+  color: #334155; /* Slate-700 ფერი ტექსტისთვის */
+  padding: 12px 28px;
+  border-radius: 12px;
+  border: 1.5px solid #e2e8f0;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-hero-outline:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #27ae60; /* ჰოვერზე ტექსტი მწვანდება */
+  transform: translateY(-3px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+}
+
+/* დაჭერის ეფექტი ორივე ღილაკისთვის */
+.btn-hero-primary:active, .btn-hero-outline:active {
+  transform: translateY(-1px);
+}
+
+/* ანიმაციები (უფრო ნაზი მოძრაობა) */
+@keyframes mainImgFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes badgeFloat1 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(8px, -5px); }
+}
+
+@keyframes badgeFloat2 {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-8px, 5px); }
+}
+
+
+.subtitle{
+    letter-spacing: 1.2px;
+    text-shadow: 1px 2px 8px;
+}
+
+.cart-btn {
+  text-decoration: none;
+  color: inherit;
+}
+
+.cart-icon-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px;
+}
+
+.bi-cart3 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.cart-count {
+  position: absolute;
+  top: 0px;
+  right: -2px;
+  color: white;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white; /* თეთრი ჩარჩო რომ უკეთ გამოიყოს */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
