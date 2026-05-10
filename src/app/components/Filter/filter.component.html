@@ -105,6 +105,41 @@
 </section>
 
   </div>
+
+ <div class="pagination-container d-flex justify-content-center mt-5 mb-4" *ngIf="totalPages > 1">
+  <nav aria-label="Product pagination">
+    <ul class="pagination pagination-modern">
+      
+      <li class="page-item" [class.disabled]="filters.pageIndex === 1">
+        <button class="page-link" (click)="changePage(filters.pageIndex - 1)" [disabled]="filters.pageIndex === 1">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+      </li>
+
+      <ng-container *ngFor="let p of [].constructor(totalPages); let i = index">
+        <li class="page-item" 
+            *ngIf="shouldShowPage(i + 1)"
+            [class.active]="filters.pageIndex === (i + 1)">
+          <button class="page-link" (click)="changePage(i + 1)">
+            {{ i + 1 }}
+          </button>
+        </li>
+        
+        <li class="page-item disabled" *ngIf="showDots(i + 1)">
+          <span class="page-link border-0 bg-transparent">...</span>
+        </li>
+      </ng-container>
+
+      <li class="page-item" [class.disabled]="filters.pageIndex === totalPages">
+        <button class="page-link" (click)="changePage(filters.pageIndex + 1)" [disabled]="filters.pageIndex === totalPages">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </li>
+
+    </ul>
+  </nav>
+</div>
+
 </div>
 
 

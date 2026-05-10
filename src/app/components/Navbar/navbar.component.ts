@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router'; // <-- routerLink-ისთვ�
 })
 export class NavbarComponent implements OnInit { 
    isMenuCollapsed = true; // თავიდან მენიუ დაკეტილია
-
+   cartItemCount: number = 0;
 constructor(public apiService: ApiService) {}
   toggleMenu() {
     this.isMenuCollapsed = !this.isMenuCollapsed;
@@ -27,6 +27,10 @@ ngOnInit() {
       searchInput.value = ''; // ნავბარში ტექსტის წაშლა
     }
   });
+
+  this.apiService.cartCount$.subscribe(count => {
+      this.cartItemCount = count;
+    });
 }
 
 

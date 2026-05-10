@@ -14,3 +14,10 @@ body {
 .product-card:hover {
   transform: translateY(-5px);
 }
+
+/* ეს კოდი გათიშავს ჩარჩოს პაგინაციის ყველა ღილაკზე დაჭერისას */
+.pagination-modern .page-item .page-link:focus,
+.pagination-modern .page-item .page-link:active {
+  outline: none !important;
+  box-shadow: none !important; /* ზოგჯერ ბრაუზერები box-shadow-საც იყენებენ */
+}

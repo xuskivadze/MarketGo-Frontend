@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http';
 import { Observable,Subject,BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+
   // დარწმუნდი, რომ პორტი (7083) ზუსტია
   private baseUrl = 'https://localhost:7083/api';
 
+
+  
 private salesTrigger = new Subject<void>();
 salesTrigger$ = this.salesTrigger.asObservable();
 
@@ -35,6 +38,11 @@ triggerSearch(term: string) {
  getProducts(filters: any): Observable<any> {
   let params = new HttpParams();
 
+  const pageIndex = filters.pageIndex || 1;
+  const pageSize = filters.pageSize || 12;
+  
+  params = params.append('pageIndex', pageIndex.toString());
+  params = params.append('pageSize', pageSize.toString());
   // 1. ვაიძულებთ პროგრამას, რომ categoryId ციფრად აღიქვას (+)
   const catId = +filters.categoryId;
 
@@ -104,17 +112,50 @@ triggerResetSearch() {
 
   // ნივთის წაშლა კალათიდან
   removeItem(itemId: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/Carts/items/${itemId}`);
-  }
+  return this.http.delete(`${this.baseUrl}/Carts/items/${itemId}`).pipe(
+    tap(() => {
+      // წაშლის მერე თავიდან ვტვირთავთ კალათას, რაც ავტომატურად განაახლებს ნავბარსაც
+      this.getCart(2).subscribe(); 
+    })
+  );
+}
 
  // api.service.ts-ში ჩაამატე ეს ფუნქცია
-clearCart(userId: number): Observable<any> {
-  return this.http.delete(`${this.baseUrl}/Carts/clear/${userId}`);
+
+// api.service.ts-ში
+// api.service.ts
+
+
+getUserOrders(userId: number): Observable<any> {
+  // Swagger-ის მიხედვით: GET https://localhost:7083/api/Orders/user/{userId}
+  return this.http.get(`${this.baseUrl}/Orders/user/${userId}`);
 }
 
-createOrder(orderData: any): Observable<any> {
-  return this.http.post(`${this.baseUrl}/Orders`, orderData);
-}
+
+
+updateCartCount(count: number) {
+    this.cartCount.next(count);
+  }
+
+
+  // 1. ორდერის შექმნა (POST)
+  createOrder(orderData: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/Orders`, orderData);
+  }
+
+  // 2. სტატუსის განახლება (PUT)
+  updateOrderStatus(orderId: number, status: string): Observable<any> {
+    // ბექენდი ელოდება უბრალო სტრინგს Body-ში, ამიტომ ვფუთავთ JSON-ში
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.put(`${this.baseUrl}/Orders/${orderId}/status`, JSON.stringify(status), { headers });
+  }
+
+  // 3. კალათის დაცლა (DELETE)
+  clearCart(userId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/Carts/clear/${userId}`);
+  }
+
+  
 
 
 }

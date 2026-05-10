@@ -18,6 +18,8 @@ export class FilterComponent implements OnInit {
   public products: any[] = [];
   public cartMessage: string | null = null;
  
+  public totalPages: number = 0;
+  public totalCount: number = 0;
 
   // ფილტრების ობიექტი ტიპიზაციის გარეშე (any), რომ ერორები აიცილო
   public filters: any = {
@@ -27,7 +29,8 @@ export class FilterComponent implements OnInit {
     search: '',
     sort: 'name',
     onlySales: false,
-    pageIndex: 1
+    pageIndex: 1,
+    pageSize: 9
   };
 
   constructor(private apiService: ApiService, private router: Router) {}
@@ -90,26 +93,82 @@ showSales() {
   }
 
 applyFilters() {
+  // 1. ყოველთვის, როცა ფილტრს ვიყენებთ, სთეითი გადაგვყავს ჩატვირთვის რეჟიმში
   this.products = []; 
 
   this.apiService.getProducts(this.filters).subscribe({
     next: (res: any) => {
-      // 1. ჯერ ვინახავთ სერვერიდან მოსულ ყველა პროდუქტს დროებით ცვლადში
-      let allItems = res.data?.items || res.items || res;
+      // 2. ვიღებთ მონაცემებს PagedResult-იდან (res.data)
+      // შენი Swagger-ის მიხედვით, პასუხი მოდის "data" ობიექტში
+      const pagedData = res.data || res;
+      let allItems = pagedData.items || [];
 
-      // 2. ვამოწმებთ, ჩართულია თუ არა "მხოლოდ ფასდაკლებები"
+      // 3. ფასდაკლების ფილტრი (თუ ფრონტზე გაქვს SALE ჩართული)
       if (this.filters.onlySales === true) {
-        // ვფილტრავთ მასივს: ვტოვებთ მხოლოდ მათ, ვისაც ფასი დაკლებული აქვს
         this.products = allItems.filter((p: any) => p.currentPrice < p.price);
       } else {
-        // თუ SALE არ არის ჩართული, ვაჩვენებთ ყველაფერს
         this.products = allItems;
       }
+
+      // 4. პაგინაციის მონაცემების შენახვა კომპონენტის ცვლადებში
+      // ეს მნიშვნელოვანია, რომ HTML-ში გვერდების ღილაკები გამოჩნდეს
+      this.totalPages = pagedData.totalPages || 0;
+      this.totalCount = pagedData.totalCount || 0;
+      this.filters.pageIndex = pagedData.pageIndex || 1;
       
-      console.log('ნაჩვენები პროდუქტების რაოდენობა:', this.products.length);
+      console.log('მონაცემები ჩაიტვირთა:', {
+        count: this.products.length,
+        total: this.totalCount,
+        pages: this.totalPages
+      });
     },
-    error: (err) => console.error('შეცდომა:', err)
+    error: (err) => {
+      console.error('პროდუქტების ჩატვირთვის შეცდომა:', err);
+    }
   });
+}
+
+
+
+changePage(newPage: number) {
+  if (newPage >= 1 && newPage <= this.totalPages) {
+    this.filters.pageIndex = newPage;
+    this.applyFilters();
+    
+    // გვერდზე გადასვლისას ავიდეს პროდუქტების დასაწყისში
+    const element = document.getElementById('products-section');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+}
+
+shouldShowPage(page: number): boolean {
+  const current = this.filters.pageIndex;
+  const last = this.totalPages;
+
+  // თუ სულ 5 ან ნაკლები გვერდია, გამოაჩინე ყველა
+  if (last <= 5) return true;
+
+  // ყოველთვის გამოაჩინე პირველი და ბოლო გვერდი
+  if (page === 1 || page === last) return true;
+
+  // აჩვენე გვერდები მიმდინარეს გარშემო ისე, რომ ჯამში 5-მდე ავიდეს
+  // (2 გვერდი აქეთ, 2 გვერდი იქით)
+  if (Math.abs(page - current) <= 1) return true;
+
+  return false;
+}
+
+showDots(page: number): boolean {
+  const current = this.filters.pageIndex;
+  const last = this.totalPages;
+
+  // წერტილები გამოჩნდეს მხოლოდ მაშინ, როცა რეალური გამოტოვებაა
+  if (page === 2 && current > 3) return true;
+  if (page === last - 1 && current < last - 2) return true;
+
+  return false;
 }
 
 // კომპონენტის შიგნით, კონსტრუქტორამდე დაამატე:
@@ -170,7 +229,8 @@ addtoCart(item: any) {
       search: '',
       sort: 'name',
       onlySales: false,
-      pageIndex: 1
+      pageIndex: 1,
+      pageSize: 9
     };
     this.apiService.triggerResetSearch();
     this.applyFilters();

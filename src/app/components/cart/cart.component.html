@@ -30,7 +30,7 @@
          
 <div class="col-4 col-md-2 p-3">
   <div class="img-box d-flex align-items-center justify-content-center position-relative">
-    <span class="badge-sale" *ngIf="item.salePrice > 0">SALE</span>
+    <span class="badge-sale" *ngIf="item.discountPrice > 0">SALE</span>
     
     <img [src]="item.pictureUrl" 
          class="img-fluid rounded-3 shadow-sm" 
@@ -38,6 +38,10 @@
          (error)="handleImageError($event)"> 
   </div>
 </div>
+
+
+
+
             
             <!-- Product Info -->
             <div class="col-8 col-md-5 px-3">
@@ -60,9 +64,9 @@
                 </div>
 
    <div class="price-display text-center flex-grow-1 d-flex flex-column align-items-center">
-                  <ng-container *ngIf="item.salePrice > 0; else regularPrice">
+                  <ng-container *ngIf="item.discountPrice > 0; else regularPrice">
                     <span class="old-price-cart">{{ item.price * item.quantity | number }} ₾</span>
-                    <span class="price-tag-sale">{{ item.salePrice * item.quantity | number }} ₾</span>
+                    <span class="price-tag-sale">{{ item.discountPrice * item.quantity | number }} ₾</span>
                   </ng-container>
   
   <ng-template #regularPrice>
@@ -86,20 +90,20 @@
         <div class="summary-sticky shadow-lg">
           <h4 class="fw-bold mb-4">შეკვეთის დეტალები</h4>
           <div class="summary-row d-flex justify-content-between mb-3">
-            <span>პროდუქტები</span>
-            <span>{{cartData.items.length}}</span>
+            <span>პროდუქტები:</span>
+            <span class="fw-bold text-success">{{cartData.items.length}} </span>
           </div>
           <div class="summary-row d-flex justify-content-between mb-3">
-            <span>მიწოდება</span>
-            <span class="text-success fw-bold">უფასო</span>
+            <span>მიწოდება:</span>
+            <span class="text-success fw-bold ">ყველგან</span>
           </div>
           <hr class="my-4 opacity-10">
           <div class="summary-row d-flex justify-content-between align-items-center mb-4">
             <span class="h5 fw-bold">სულ:</span>
-            <span class="h3 fw-bold color-green">{{ calculateTotal() | number }} ₾</span>
+            <span class="h3 fw-bold color-green text-success">{{ calculateTotal() | number }} ₾</span>
           </div>
-          <button type="button" class="btn btn-success-modern w-100 py-3 shadow" (click)="checkout()">
-            ყიდვის გაფორმება
+          <button type="button" id="checkoutBtn" class="btn btn-success btn-lg w-100 py-3 shadow class=btmm" (click)="processCheckout()" [disabled]="isLoading">
+            {{ isLoading ? 'მუშავდება...' : 'გადახდა' }}
           </button>
         </div>
       </div>
@@ -109,10 +113,62 @@
     
 
     <!-- Empty Cart -->
-    <div *ngIf="!isLoading && cartData?.items?.length === 0" class="empty-cart-card text-center animate-in">
-      <img src="https://cdn-icons-png.flaticon.com/512/11329/11329060.png" class="empty-img mb-4">
+    <div *ngIf="!isLoading && cartData?.items?.length === 0" class="empty-cart-card text-center animate-in px-3">
+      <img src="https://cdn-icons-png.flaticon.com/512/11329/11329060.png" class="empty-img mb-3">
       <h2 class="fw-bold">თქვენი კალათა ცარიელია</h2>
-      <button class="btn btn-success-modern px-5 py-3 mt-3" routerLink="/">დაიწყე შოპინგი</button>
+      <button class="btn btn-success-modern px-5 py-3 mt-3" routerLink="/">შოპინგის დაწყება</button>
     </div>
   </div>
 </div>
+
+
+
+
+<div class="payment-overlay" *ngIf="showPaymentModal" (click)="showPaymentModal = false">
+  <div class="payment-modal" (click)="$event.stopPropagation()">
+    
+    <div class="modal-header-custom">
+      <h4><i class="bi bi-credit-card-fill card-type-icon"></i>  ბარათით გადახდა</h4>
+      <button class="close-icon" (click)="showPaymentModal = false">&times;</button>
+    </div>
+
+      <div class="input-group-custom">
+        <label>ბარათის ნომერი</label>
+        <div class="card-input-wrapper">
+          <input type="text" class="form-control-custom" placeholder="0000 0000 0000 0000">
+          
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-7">
+          <div class="input-group-custom">
+  <label>მოქმედების ვადა</label>
+  <input type="text" 
+         class="form-control-custom" 
+         placeholder="MM / YYYY" 
+         maxlength="9" 
+         #expiryInput
+         (input)="formatExpiry(expiryInput)">
+</div>
+        </div>
+        <div class="col-5">
+          <div class="input-group-custom">
+            <label>CVV</label>
+            <input type="password" class="form-control-custom" placeholder="***" maxlength="3">
+          </div>
+        </div>
+      </div>
+
+      <button class="pay-btn" (click)="confirmPayment()" [disabled]="isLoading">
+        <span *ngIf="!isLoading">გადახდა (Pay Now)</span>
+        <div class="spinner-border spinner-border-sm" *ngIf="isLoading"></div>
+      </button>
+
+      <div class="payment-partners">
+        <img src="https://www.logo.wine/a/logo/Visa_Inc./Visa_Inc.-Logo.wine.svg" alt="Visa">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq_H5S5slkP_3P0dIpLdDcOnr8RtxSFyZung&s" alt="TBC">
+      </div>
+    </div>
+  </div>
