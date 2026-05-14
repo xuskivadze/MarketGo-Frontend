@@ -1,10 +1,7 @@
 <div class="container">
-  <!-- კატეგორიების სექცია -->
  <div class="category-wrapper">
-  <!-- სათაური ცენტრში ხაზით -->
   <h3 class="category-title">კატეგორიები</h3>
   
-  <!-- ღილაკების კონტეინერი ცენტრისთვის -->
   <div class="category-list-centered">
     <button class="cat-btn" 
             [class.active]="filters.categoryId === 0" 
@@ -21,7 +18,6 @@
   </div>
 </div>
 
-  <!-- ზედა პანელი: ძებნა და სორტირება -->
   <div class="top-bar">
     <div class="search-box" id="products-section">
       <input type="text" [(ngModel)]="filters.search" (input)="applyFilters()" placeholder="მოძებნე პროდუქტი...">
@@ -37,7 +33,6 @@
   </div>
 
   <div class="main-layout">
-    <!-- გვერდითა პანელი: მხოლოდ ფასის ფილტრი -->
     <aside class="sidebar">
       <h3>ფასის ფილტრი</h3>
       <div class="price-inputs">
@@ -48,36 +43,26 @@
       <button class="reset-btn" (click)="reset()">გასუფთავება</button>
     </aside>
 
-    <!-- პროდუქტების სექცია -->
- <!-- პროდუქტების სექცია -->
 <section class="products-grid" >
   
-  <!-- [routerLink] გადაიყვანს მომხმარებელს დეტალურ გვერდზე -->
-  <!-- style="cursor: pointer;" საჭიროა, რომ მომხმარებელმა მიხვდეს, რომ ქარდი კლიკებადია -->
   <div class="product-card" 
        *ngFor="let item of products" 
        [routerLink]="['/product-details', item.id]" 
        style="cursor: pointer;">
 
-    <!-- SALE ბეჯი -->
     <div class="badge" *ngIf="item.currentPrice < item.price">SALE</div>
     
-    <!-- პროდუქტის სურათი -->
     <div class="image-wrapper">
       <img [src]="item.pictureUrl || 'https://placehold.co/400x400?text=' + item.name" [alt]="item.name">
     </div>
     
     <div class="product-info">
-      <!-- კატეგორია -->
       <span class="cat-name">{{item.categoryName}}</span>
       
-      <!-- სახელი -->
       <h4 class="product-title">{{item.name}}</h4>
       
-      <!-- აღწერა -->
       <p class="product-description">{{item.description}}</p>
       
-      <!-- ფასი -->
       <div class="price-row">
         <div class="price-container">
           <span class="price">{{item.currentPrice}} ₾</span>
@@ -85,7 +70,6 @@
         </div>
       </div>
       
-      <!-- ღილაკი: $event.stopPropagation() აჩერებს გადამისამართებას, როცა მხოლოდ კალათაში გინდა დამატება -->
       <button class="add-to-cart" (click)="$event.stopPropagation(); addtoCart(item)">
       🛒 კალათაში
     </button>
@@ -96,7 +80,6 @@
     </div>
   </div>
 
-  <!-- თუ პროდუქტი არ მოიძებნა -->
   <div class="no-results" *ngIf="products.length === 0">
     <div class="no-results-content">
       <p>პროდუქტები ვერ მოიძებნა.</p>
@@ -143,23 +126,36 @@
 </div>
 
 
-
-
 <div class="toast-container" 
      *ngIf="showToast" 
-     (mousedown)="goToCart()" 
-     style="cursor: pointer !important;">
+     (click)="currentToastImage ? goToCart() : router.navigate(['/login'])" 
+     [style.cursor]="'pointer'">
+     
   <div class="toast-content">
-    <div class="toast-image-wrapper">
+    <div class="toast-image-wrapper" *ngIf="currentToastImage">
       <img [src]="currentToastImage" alt="product">
       <div class="mini-check">✓</div>
     </div>
     
+    <div class="error-icon" *ngIf="!currentToastImage" style="font-size: 22px;">
+      ⚠️
+    </div>
+
     <div class="message-text">
-      <span class="status">დაემატა კალათაში</span>
       <p class="toast-product-info">{{ toastMessage }}</p>
-      <span class="view-cart-link">გადადი ნახვაზე</span>
+      
+      <span class="added-label" *ngIf="currentToastImage">
+        კალათაშია (გადადი ნახვაზე)
+      </span>
+      
+      <span class="added-label" 
+      *ngIf="!currentToastImage && toastMessage.includes('ავტორიზაცია')" 
+      (click)="router.navigate(['/login'])" 
+      style="color: #3498db; text-decoration: underline; cursor: pointer;">
+    გაიარე ავტორიზაცია
+</span>
     </div>
   </div>
-  <div class="progress-bar"></div>
+  
+  <div class="progress-bar" [style.background-color]="currentToastImage ? '#2ecc71' : '#e74c3c'"></div>
 </div>

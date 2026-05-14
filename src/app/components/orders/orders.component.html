@@ -1,0 +1,57 @@
+<div class="orders-container">
+  <div class="container py-4">
+    
+    <div class="page-header mb-5 text-center text-md-start">
+      <h2 class="fw-bold text-dark">შეკვეთების ისტორია</h2>
+      <div class="header-underline"></div>
+    </div>
+
+    <div *ngIf="orders && orders.length > 0; else emptyState">
+      <div *ngFor="let order of orders; let i = index" 
+           class="order-card mb-4 animate-up"
+           [style.animation-delay]="i * 0.1 + 's'">
+        
+        <div class="row g-0">
+          <div class="col-12 col-md-3 info-box p-4 text-center text-md-start">
+            <span class="label">შეკვეთის #</span>
+            <div class="order-id">{{order.id}}</div>
+            <div class="order-date mt-2">{{ order.orderDate | date:'dd.MM.yyyy' }}</div>
+            <div [ngClass]="getStatusClass(order.status)" class="status-badge mt-3">
+              {{ order.status }}
+            </div>
+          </div>
+
+          <div class="col-12 col-md-6 products-box p-4">
+            <div class="section-label mb-3">შეკვეთილი ნივთები</div>
+            <div class="product-item" *ngFor="let item of order.orderItems">
+              <div class="d-flex align-items-center">
+                <div class="check-icon"><i class="bi bi-check2-circle"></i></div>
+                <div class="product-name">{{ item.productName }}</div>
+              </div>
+              <div class="product-qty">x {{ item.quantity }}</div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-3 price-box p-4 text-center">
+            <div class="price-wrapper h-100 d-flex flex-column justify-content-center align-items-center">
+              <span class="label mb-1">ჯამური ფასი</span>
+              <div class="final-price">{{ order.total | number }} ₾</div>
+              <div class="success-label mt-2">
+                <i class="bi bi-shield-check me-1"></i> გადახდილია
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #emptyState>
+      <div class="empty-box text-center py-5">
+        <i class="bi bi-bag-x mb-3 d-block text-muted" style="font-size: 4rem;"></i>
+        <h4 class="text-muted">შეკვეთები არ მოიძებნა</h4>
+        <button routerLink="/shop" class="btn btn-shop mt-3">მაღაზიაში დაბრუნება</button>
+      </div>
+    </ng-template>
+
+  </div>
+</div>

@@ -1,12 +1,19 @@
-// app.config.ts
-import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { routes } from './app.routes'; // შენი როუტების ფაილი
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { provideRouter, RouterModule } from '@angular/router';
+import { routes } from './app.routes'; 
 import { provideHttpClient } from '@angular/common/http';
+
+export const API_URL = 'https://marketgo-backend.onrender.com';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes), // აი ეს ხაზი აკლია!
-    provideHttpClient()
+    provideRouter(routes), 
+    provideHttpClient(),
+    importProvidersFrom(
+      RouterModule.forRoot(routes, {
+        anchorScrolling: 'enabled',
+        scrollPositionRestoration: 'enabled'
+      })
+    )
   ]
 };

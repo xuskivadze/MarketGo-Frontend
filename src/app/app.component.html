@@ -1,14 +1,10 @@
-<!-- app.component.html -->
 
-<!-- 1. ნავბარი - ყოველთვის ჩანს -->
 <app-navbar></app-navbar>
 
-<!-- 2. კატეგორიების სექცია - თუ გინდა რომ მხოლოდ მთავარზე ჩნდეს, 
-     ესეც FilterComponent-ში უნდა გადავიდეს. 
-     თუ გინდა სულ ჩანდეს, დატოვე აქ. -->
 <app-category-menu (categoryChanged)="onCategoryChange($event)"></app-category-menu>
 
 <main class="content-area">
-    <!-- ეს არის "ფანჯარა", სადაც Angular ჩატვირთავს ან ფილტრებს, ან დეტალებს -->
     <router-outlet></router-outlet>
 </main>
+
+<app-footer></app-footer>

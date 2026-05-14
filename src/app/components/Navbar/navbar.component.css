@@ -1,4 +1,3 @@
-/* --- 1. ნავბარის და ძებნის სტილები --- */
 .logo-box {
   background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%) !important;
   color: white !important;
@@ -18,7 +17,6 @@
   margin-left: 5px;
 }
 
-/* ძიების ველი - გასწორებული */
 .search-input-clean {
   width: 100%;
   padding: 12px 24px;
@@ -36,7 +34,6 @@
   box-shadow: 0 4px 15px rgba(46, 204, 113, 0.08);
 }
 
-/* ავტორიზაციის ღილაკები */
 .btn-auth {
   color: #64748b;
   text-decoration: none !important;
@@ -66,7 +63,6 @@
   box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
 }
 
-/* კალათა - ორიგინალი ვიზუალით */
 .cart-btn {
   background: #f1f5f9;
   color: #1e293b;
@@ -105,7 +101,6 @@
 }
 
 
-/* --- 1. ნავბარი და ძებნა (უცვლელი, სტაბილური) --- */
 .logo-box {
   background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%) !important;
   color: white !important; width: 42px; height: 42px;
@@ -119,7 +114,6 @@
 }
 
 
-/* მობილურზე ელემენტების გასწორება */
 @media (max-width: 991.98px) {
   .navbar-collapse {
     background: white;
@@ -130,33 +124,27 @@
   }
 
   .navbar-nav {
-    flex-direction: column; /* ღილაკები ჩამწკრივდეს ერთმანეთის ქვეშ */
+    flex-direction: column;
     width: 100%;
     text-align: center;
   }
 
   .btn-reg {
-    width: 100%; /* რეგისტრაციის ღილაკი გაიწელოს */
+    width: 100%;
     margin-bottom: 10px;
   }
 
   .cart-btn {
-    margin: 10px auto; /* კალათა გაცენტრდეს */
+    margin: 10px auto;
   }
 }
 
-/* ლოგოს ტექსტის ზომა მობილურზე რომ არ გაიჭიმოს */
 @media (max-width: 400px) {
   .logo-text {
     font-size: 1.2rem;
   }
 }
 
-
-
-
-
-/* --- 2. Hero (ბანერის) სექცია --- */
 .hero-section { 
   margin-top: 25px;
   padding: 70px 0; 
@@ -175,11 +163,10 @@
 
 .text-green { color: #2ecc71 !important; }
 
-/* --- 3. განიერი მართკუთხა ფოტო --- */
 .hero-image-container {
   position: relative;
   width: 100%;
-  max-width: 550px; /* სიგრძეში გავზარდეთ */
+  max-width: 550px;
   margin: 0 auto;
   animation: mainImgFloat 6s ease-in-out infinite;
   border-radius: 25px;
@@ -188,14 +175,13 @@
 
 .hero-main-img {
   width: 100%;
-  height: 280px; /* სიმაღლეში დავაპატარავეთ მართკუთხა ფორმისთვის */
+  height: 280px;
   object-fit: cover;
   border-radius: 25px;
   box-shadow: 5px 15px 30px rgba(0,0,0,0.1);
 
 }
 
-/* მცურავი წარწერები (პოზიციები გასწორებულია ახალ ფორმაზე) */
 .floating-card {
   position: absolute;
   background: white;
@@ -223,9 +209,6 @@
   animation: badgeFloat2 5s ease-in-out infinite;
 }
 
-/* --- 4. დახვეწილი და პროფესიონალური ღილაკები --- */
-
-/* მთავარი ღილაკი (Primary) */
 .btn-hero-primary {
   background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%) !important;
   color: white !important;
@@ -237,19 +220,18 @@
   letter-spacing: 0.2px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 14px 0 rgba(39, 174, 96, 0.3); /* მწვანე ჩრდილი სიღრმისთვის */
+  box-shadow: 0 4px 14px 0 rgba(39, 174, 96, 0.3);
 }
 
 .btn-hero-primary:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
-  filter: brightness(1.05); /* ოდნავ ანათებს ჰოვერზე */
+  filter: brightness(1.05);
 }
 
-/* მეორადი ღილაკი (Outline/White) */
 .btn-hero-outline {
   background: #ffffff;
-  color: #334155; /* Slate-700 ფერი ტექსტისთვის */
+  color: #334155;
   padding: 12px 28px;
   border-radius: 12px;
   border: 1.5px solid #e2e8f0;
@@ -264,17 +246,15 @@
 .btn-hero-outline:hover {
   background: #f8fafc;
   border-color: #cbd5e1;
-  color: #27ae60; /* ჰოვერზე ტექსტი მწვანდება */
+  color: #27ae60;
   transform: translateY(-3px);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
 }
 
-/* დაჭერის ეფექტი ორივე ღილაკისთვის */
 .btn-hero-primary:active, .btn-hero-outline:active {
   transform: translateY(-1px);
 }
 
-/* ანიმაციები (უფრო ნაზი მოძრაობა) */
 @keyframes mainImgFloat {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
@@ -289,7 +269,6 @@
   0%, 100% { transform: translate(0, 0); }
   50% { transform: translate(-8px, 5px); }
 }
-
 
 .subtitle{
     letter-spacing: 1.2px;
@@ -323,6 +302,188 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid white; /* თეთრი ჩარჩო რომ უკეთ გამოიყოს */
+  border: 2px solid white;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
+
+.navbar-toggler:focus {
+    box-shadow: none !important;
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        overflow: hidden;
+    }
+}
+
+.navbar-toggler {
+    border: none;
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    outline: none;
+    box-shadow: none !important;
+    transition: transform 0.3s ease;
+}
+
+.navbar-toggler:active {
+    transform: scale(0.9);
+}
+
+.navbar-toggler i {
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar-toggler:active i {
+  transform: rotate(90deg);
+}
+
+.cart-btn {
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.cart-btn .bi-cart3 {
+  display: inline-block;
+  transition: all 0.3s ease;
+  color: #333;
+}
+
+.cart-btn:hover .bi-cart3 {
+  color: #2ecc71 !important;
+  transform: scale(1.15);
+}
+
+.nav-link-custom {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #333 !important;
+  text-decoration: none;
+  font-weight: 500;
+}
+.nav-link-custom:hover { color: #2ecc71 !important; }
+
+.btn-logout-minimal {
+  background: #fff5f5;
+  color: #e74c3c;
+  border: 1px solid #fee2e2;
+  padding: 5px 15px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.btn-logout-minimal:hover { background: #e74c3c; color: white; }
+
+@media (max-width: 991px) {
+  .navbar-nav {
+    flex-direction: column;
+    width: 100%;
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+    gap: 15px !important;
+  }
+  .cart-btn, .btn-logout-minimal, .nav-link-custom, .btn-auth, .btn-reg {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.nav-link-custom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #3f414d !important;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 8px 16px;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link-custom i {
+  color: #2ecc71;
+  font-size: 1.15rem;
+  transition: transform 0.3s ease;
+}
+
+.nav-link-custom:hover {
+  background-color: #f1fcf5;
+  color: #2ecc71 !important;
+}
+
+.nav-link-custom:hover i {
+  transform: translateX(-2px) rotate(-10deg);
+}
+
+.btn-logout-minimal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #fff5f5;
+  color: #e74c3c;
+  border: 1px solid #fee2e2;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-logout-minimal i {
+  font-size: 1.1rem;
+}
+
+.btn-logout-minimal:hover {
+  background-color: #e74c3c;
+  color: #ffffff;
+  border-color: #e74c3c;
+  box-shadow: 0 4px 12px rgba(231, 76, 60, 0.2);
+  transform: translateY(-1px);
+}
+
+.btn-logout-minimal:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 991px) {
+  .nav-link-custom, .btn-logout-minimal {
+    width: 100%;
+    justify-content: center;
+    padding: 12px;
+    font-size: 1rem;
+  }
+}
+
+
+@media (max-width: 991px) {
+  .navbar-nav {
+    flex-direction: column;
+    width: 100%;
+    padding: 15px 0;
+    gap: 12px !important;
+    border-top: 1px solid #eee;
+    margin-top: 10px;
+  }
+
+  .nav-link-custom, 
+  .btn-logout-minimal, 
+  .btn-auth, 
+  .btn-reg, 
+  .cart-btn {
+    width: 100%;
+    justify-content: center;
+    border: none !important;
+    background-color: #f8f9fa;
+    height: 48px;
+    border-radius: 12px;
+  }
+
+  .btn-logout-minimal {
+    background-color: #fff5f5;
+    color: #e74c3c;
+  }
+}
+

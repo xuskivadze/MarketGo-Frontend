@@ -1,0 +1,75 @@
+<footer class="mg-footer">
+  <div class="container">
+    <div class="row justify-content-between align-items-start gy-3 gy-lg-5">
+      
+      <div class="col-xl-3 col-lg-3 col-md-6 col-12">
+        <div class="f-brand-box">
+          <img src="logo-big.png" alt="MarketGo" class="f-logo">
+          <p class="f-text mt-3">
+            საქართველოს წამყვანი ონლაინ პლატფორმა. ჩვენთან შოპინგი მარტივი, სწრაფი და უსაფრთხოა.
+          </p>
+          <div class="f-socials">
+            <a href="https://www.facebook.com/" class="s-link"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.instagram.com/" class="s-link"><i class="bi bi-instagram"></i></a>
+            <a href="https://wa.me/9955XXXXXXXX" target="_blank" class="s-link wa"><i class="bi bi-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xl-2 col-lg-2 col-md-3 col-6">
+        <h6 class="f-header">ნავიგაცია</h6>
+        <ul class="f-list">
+          <li><a routerLink="/" (click)="scrollToTop()">მთავარი</a></li>
+          <li><a href="javascript:void(0)" (click)="scrollToCategories()">კატეგორიები</a></li>
+          <li><a routerLink="/" (click)="scrollToProducts()">პროდუქტები</a></li>
+        </ul>
+      </div>
+
+      <div class="col-xl-2 col-lg-2 col-md-3 col-6">
+        <h6 class="f-header">დახმარება</h6>
+        <ul class="f-list">
+          <li><a href="javascript:void(0)" (click)="scrollToTop()">მიწოდება</a></li>
+          <li><a href="javascript:void(0)" (click)="scrollToTop()">დაბრუნება</a></li>
+          <li><a href="javascript:void(0)" (click)="scrollToTop()">წესები</a></li>
+        </ul>
+      </div>
+
+      <div class="col-xl-4 col-lg-4 col-md-12 col-12">
+        <h6 class="f-header class = h6">კონტაქტი</h6>
+        <div class="f-contact-card">
+          <div class="c-item">
+            <div class="c-icon"><i class="bi bi-telephone"></i></div>
+            <div class="c-info">
+              <span>დაგვიკავშირდით</span>
+              <strong>+995 5xx xx xx xx</strong>
+            </div>
+          </div>
+          <div class="c-item mt-3">
+            <div class="c-icon"><i class="bi bi-envelope"></i></div>
+            <div class="c-info">
+              <span>მოგვწერეთ მეილზე</span>
+              <strong>info&#64;marketgo.ge</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="f-bottom mt-5">
+      <div class="d-flex flex-wrap justify-content-between align-items-center">
+        <p class="m-0 copy-txt">© 2026 <span>MarketGo</span>. ყველა უფლება დაცულია.</p>
+        <div class="payment-icons">
+          <i class="bi bi-credit-card-2-front"></i>
+          <i class="bi bi-shield-check"></i>
+          <span>Secure Checkout</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="scroll-top-btn" [class.show]="showScrollBtn" (click)="scrollToTop()">
+  <i class="bi bi-arrow-up-short"></i>
+</button>
+
+</footer>

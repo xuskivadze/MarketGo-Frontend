@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class ProductDetailsComponent implements OnInit {
   product: any;
   reviews: any[] = [];
-  selectedImage: string = ''; // აქ შევინახავთ აქტიურ ფოტოს
+  selectedImage: string = '';
   public showToast: boolean = false;
   public toastMessage: string = '';
   public currentToastImage: string = '';
@@ -23,7 +23,7 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
-    private router: Router
+    public router: Router
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +43,6 @@ export class ProductDetailsComponent implements OnInit {
     this.apiService.getProductById(id).subscribe((res: any) => {
       if (res && res.isSuccess) {
         this.product = res.data;
-        // როცა პროდუქტი ჩაიტვირთება, პირველადი ფოტო იყოს pictureUrl
         this.selectedImage = this.product.pictureUrl;
       }
     });
@@ -54,48 +53,57 @@ export class ProductDetailsComponent implements OnInit {
     });
   }
 
-  // ფუნქცია, რომელიც შეცვლის მთავარ ფოტოს პატარა ფოტოზე დაჭერისას
   selectImage(url: string) {
     this.selectedImage = url;
   }
 
- // განახლებული addToCart მეთოდი
-  addToCart() {
-    if (!this.product || !this.product.id) return;
+  
+ addToCart() {
+  if (!this.product || !this.product.id) return;
 
-    this.apiService.addToCart(2, this.product.id, 1).subscribe({
-      next: (res: any) => {
-        if (res) {
-          // 1. ძველი ტაიმერის გასუფთავება
-          if (this.toastTimeout) {
-            clearTimeout(this.toastTimeout);
-          }
-
-          // 2. მონაცემების მომზადება
-          this.toastMessage = `${this.product.name} - ${this.product.currentPrice} ₾`;
-          this.currentToastImage = this.product.pictureUrl || 'https://placehold.co/50x50';
-          
-          // 3. ანიმაციის რესეტი და ჩვენება
-          this.showToast = false;
-          setTimeout(() => {
-            this.showToast = true;
-          }, 10);
-
-          // 4. ნავბარის ციფრის განახლება
-          this.apiService.getCart(2).subscribe();
-
-          // 5. გაქრობის ტაიმერი
-          this.toastTimeout = setTimeout(() => {
-            this.showToast = false;
-          }, 2500);
-        }
-      },
-      error: (err) => {
-        console.error('შეცდომა კალათაში დამატებისას:', err);
-        this.toastMessage = 'ვერ მოხერხდა დამატება ❌';
-        this.showToast = true;
-        this.toastTimeout = setTimeout(() => { this.showToast = false; }, 2500);
-      }
-    });
+  const token = localStorage.getItem('token');
+  const currentUserId = Number(localStorage.getItem('userId')) || 1;
+  if (!token) {
+    if (this.toastTimeout) clearTimeout(this.toastTimeout);
+    
+    this.toastMessage = 'ავტორიზაცია საჭიროა!';
+    this.currentToastImage = '';
+    this.showToast = false;
+    
+    setTimeout(() => { this.showToast = true; }, 10);
+    this.toastTimeout = setTimeout(() => { this.showToast = false; }, 2500);
+    return;
   }
+
+  this.apiService.addToCart(currentUserId, this.product.id, 1).subscribe({
+    next: (res: any) => {
+      if (this.toastTimeout) clearTimeout(this.toastTimeout);
+      this.toastMessage = `${this.product.name} დაემატა კალათაში ✅`;
+      this.currentToastImage = this.product.pictureUrl || 'https://placehold.co/50x50';
+      this.showToast = false;
+      setTimeout(() => { this.showToast = true; }, 10);
+      this.apiService.getCart(currentUserId).subscribe();
+      this.toastTimeout = setTimeout(() => { this.showToast = false; }, 2500);
+    },
+    error: (err) => {
+      if (this.toastTimeout) clearTimeout(this.toastTimeout);
+      this.currentToastImage = ''; 
+      this.toastMessage = err.status === 401 ? 'ავტორიზაცია საჭიროა' : 'ვერ მოხერხდა დამატება';
+      this.showToast = false;
+      setTimeout(() => { this.showToast = true; }, 10);
+      this.toastTimeout = setTimeout(() => { this.showToast = false; }, 2500);
+    }
+  });
+}
+
+startShopping() {
+  this.router.navigate(['/filter'], { fragment: 'products-section' });
+}
+
+viewSales() {
+  this.router.navigate(['/filter'], { 
+    fragment: 'products-section',
+    queryParams: { sales: true } 
+  });
+}
 }

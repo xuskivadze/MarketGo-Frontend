@@ -1,16 +1,18 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom fixed-top py-2">
   <div class="container">
-    <a class="navbar-brand d-flex align-items-center" routerLink="/" (click)="scrollToTop()">
+    <a class="navbar-brand d-flex align-items-center" routerLink="/" (click)="scrollToTop(); isMenuCollapsed = true">
       <div class="logo-box me-2">MG</div>
       <span class="logo-text">MarketGo</span>
     </a>
 
-    <!-- ჰამბურგერ ღილაკი Angular-ის კლიკით -->
-    <button class="navbar-toggler" type="button" (click)="toggleMenu()">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <button class="navbar-toggler" type="button" (click)="toggleMenu()" style="border: none; outline: none;">
+  <i class="bi" 
+     [ngClass]="isMenuCollapsed ? 'bi-list' : 'bi-x-lg'" 
+     [style.color]="isMenuCollapsed ? '#1a1a1a' : '#e74c3c'"
+     style="font-size: 1.7rem; transition: 0.3s;">
+  </i>
+</button>
 
-    <!-- მენიუს ნაწილი - [class.show] აკონტროლებს გამოჩენას -->
     <div class="collapse navbar-collapse" [class.show]="!isMenuCollapsed" id="navContent">
       <div class="mx-auto w-100 px-lg-5 my-3 my-lg-0" style="max-width: 600px;">
         <input type="text" 
@@ -18,18 +20,31 @@
        class="search-input-clean" 
        placeholder="მოძებნე MarketGo-ზე..."
        (input)="onSearch($event)"
-       (keyup.enter)="onEnterSearch()"> <!-- დავამატეთ ეს ხაზი -->
+       (keyup.enter)="onEnterSearch(); isMenuCollapsed = true">
       </div>
 
       <div class="navbar-nav align-items-center gap-3">
-  <a routerLink="/login" class="btn-auth">შესვლა</a>
-  <a routerLink="/register" class="btn-reg">რეგისტრაცია</a>
-  
-  <!-- კალათის ღილაკი -->
-  <a routerLink="/cart" class="cart-btn">
+    
+        <ng-container *ngIf="!(apiService.authStatus$ | async)">
+      <a routerLink="/login" class="btn-auth" (click)="isMenuCollapsed = true">შესვლა</a>
+      <a routerLink="/register" class="btn-reg" (click)="isMenuCollapsed = true">რეგისტრაცია</a>
+    </ng-container>
+
+    <ng-container *ngIf="apiService.authStatus$ | async">
+      <a routerLink="/orders" class="nav-link-custom" (click)="isMenuCollapsed = true">
+        <i class="bi bi-box-seam"></i>
+        <span>შეკვეთები</span>
+      </a>
+      <button (click)="logout(); isMenuCollapsed = true" class="btn-logout-minimal">
+        <i class="bi bi-box-arrow-right"></i>
+        <span>გამოსვლა</span>
+      </button>
+    </ng-container>
+
+    
+  <a routerLink="/cart" class="cart-btn" (click)="isMenuCollapsed = true">
     <div class="cart-icon-wrapper">
       <i class="bi bi-cart3"></i>
-      <!-- ციფრი გამოჩნდება მხოლოდ მაშინ, როცა კალათაში რამეა (> 0) -->
     <span class="cart-count">
       {{ (apiService.cartCount$ | async) || 0 }}
     </span>
@@ -38,9 +53,9 @@
 
 </div>
     </div>
+
   </div>
 </nav>
-
 
 
 <section class="hero-section">

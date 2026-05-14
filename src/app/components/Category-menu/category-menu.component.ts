@@ -9,7 +9,6 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./category-menu.component.css']
 })
 export class CategoryMenuComponent {
-  // ეს Output ატყობინებს სხვა კომპონენტებს, რომ კატეგორია შეიცვალა
   @Output() categoryChanged = new EventEmitter<number>();
 
   categories = [
@@ -24,6 +23,6 @@ export class CategoryMenuComponent {
 
   selectCategory(id: number) {
     console.log('არჩეული კატეგორია ID:', id);
-    this.categoryChanged.emit(id); // ვაგზავნით ID-ს გარეთ
+    this.categoryChanged.emit(id);
   }
 }

@@ -1,31 +1,93 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams,HttpHeaders } from '@angular/common/http';
+import { RegisterDto, LoginDto, UserResponse } from '../models/auth.model';
 import { Observable,Subject,BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { API_URL } from '../app.config';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  // დარწმუნდი, რომ პორტი (7083) ზუსტია
-  private baseUrl = 'https://localhost:7083/api';
+  private baseUrl = `${API_URL}/api`;
+  private apiUrl = `${API_URL}/api/Account`;
 
+  private authStatus = new BehaviorSubject<boolean>(this.isLoggedIn());
+  authStatus$ = this.authStatus.asObservable();
 
   
-private salesTrigger = new Subject<void>();
-salesTrigger$ = this.salesTrigger.asObservable();
+  private salesTrigger = new Subject<void>();
+  salesTrigger$ = this.salesTrigger.asObservable();
+
+  private scrollTrigger = new Subject<void>();
+  scrollTrigger$ = this.scrollTrigger.asObservable();
+
 
   constructor(private http: HttpClient) { }
+
+
+checkAuthStatus() {
+    this.authStatus.next(this.isLoggedIn());
+  }
+
+  triggerScroll() {
+  this.scrollTrigger.next();
+}
+  
+  triggerSales() {
+  this.salesTrigger.next();
+}
+
+  register(model: RegisterDto): Observable<boolean> {
+    return this.http.post<boolean>(`${this.apiUrl}/register`, model);
+  }
+
+login(model: LoginDto): Observable<string> {
+  return this.http.post(`${this.apiUrl}/login`, model, { responseType: 'text' }).pipe(
+    tap(token => {
+      if (token) {
+        localStorage.setItem('userId', '1');
+        this.authStatus.next(true);
+      }
+    })
+  );
+}
+
+isLoggedIn(): boolean {
+  return !!localStorage.getItem('token');
+}
+
+  logout() {
+    const userId = 1;
+
+    this.clearCart(userId).subscribe({
+      next: () => {
+        console.log('კალათა სერვერზე გასუფთავდა');
+        this.finalizeLogout();
+      },
+      error: (err) => {
+        console.error('სერვერზე კალათა ვერ გასუფთავდა:', err);
+        this.finalizeLogout();
+      }
+    });
+  }
+
+    private finalizeLogout() {
+    localStorage.removeItem('token');
+    this.cartCount.next(0);
+    this.authStatus.next(false);
+  }
+
 
 triggerSalesFilter() {
     this.salesTrigger.next();
   }
 
-  // api.service.ts-ში
   private cartCount = new BehaviorSubject<number>(0);
   public cartCount$ = this.cartCount.asObservable();
-private searchTrigger = new Subject<string>();
-searchTrigger$ = this.searchTrigger.asObservable();
+  private searchTrigger = new Subject<string>();
+  searchTrigger$ = this.searchTrigger.asObservable();
 
 triggerSearch(term: string) {
   this.searchTrigger.next(term);
@@ -43,10 +105,8 @@ triggerSearch(term: string) {
   
   params = params.append('pageIndex', pageIndex.toString());
   params = params.append('pageSize', pageSize.toString());
-  // 1. ვაიძულებთ პროგრამას, რომ categoryId ციფრად აღიქვას (+)
   const catId = +filters.categoryId;
 
-  // 2. თუ ID მეტია 0-ზე, აუცილებლად ვამატებთ პარამეტრებში
   if (catId > 0) {
     params = params.append('categoryId', catId.toString());
   }
@@ -56,34 +116,27 @@ triggerSearch(term: string) {
   if (filters.search) params = params.append('search', filters.search);
   if (filters.sort) params = params.append('sort', filters.sort);
 
-  // 3. ეს ხაზი დაგვეხმარება დიაგნოსტიკაში - ნახე კონსოლში რა დაიბეჭდება!
   console.log('მოთხოვნა იგზავნება მისამართზე:', `${this.baseUrl}/Products?${params.toString()}`);
 
   return this.http.get<any>(`${this.baseUrl}/Products`, { params });
 }
   
-
-  addcart(userId: string, data: any): Observable<any> {
+    addcart(userId: string, data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/Carts/${userId}/items`, data);
   }
   
-  // api.service.ts-ში დაამატე
-getLowStockProducts(): Observable<any> {
-  return this.http.get<any>(`https://localhost:7083/api/Products/low-stock`);
+ getLowStockProducts(): Observable<any> {
+  return this.http.get<any>(`${this.baseUrl}/Products/low-stock`);
 }
 
-// აუცილებლად მიუთითე : Observable<any>
-getProductById(id: number): Observable<any> {
+  getProductById(id: number): Observable<any> {
   return this.http.get<any>(`${this.baseUrl}/Products/${id}`);
 }
 
-// api.service.ts
-getReviews(): Observable<any[]> {
-  // დარწმუნდი, რომ აქ this.baseUrl წერია და არა this.apiUrl
+  getReviews(): Observable<any[]> {
   return this.http.get<any[]>(`${this.baseUrl}/Reviews`);
 }
 
-// api.service.ts
 private resetSearchTrigger = new Subject<void>();
 resetSearchTrigger$ = this.resetSearchTrigger.asObservable();
 
@@ -91,71 +144,79 @@ triggerResetSearch() {
   this.resetSearchTrigger.next();
 }
 
-// კალათის წამოღება (userId: 2 სატესტოდ)
-  getCart(userId: number = 2): Observable<any> {
+  getCart(userId: number = 1): Observable<any> {
     return this.http.get(`${this.baseUrl}/Carts/${userId}`).pipe(
       tap((res: any) => {
         const count = res.data?.items?.length || 0;
-        this.cartCount.next(count); // ნავბარისთვის რაოდენობის განახლება
+        this.cartCount.next(count);
       })
     );
   }
 
-  // კალათაში დამატება
-  addToCart(userId: number, productId: number, quantity: number): Observable<any> {
-  const payload = { 
-    productId: productId, // დარწმუნდი რომ ბექენდშიც პატარა p-თი იწყება
-    quantity: quantity 
-  };
-  return this.http.post(`${this.baseUrl}/Carts/${userId}/items`, payload);
-}
+  addToCart(userId: any, productId: number, quantity: number): Observable<any> {
+  const token = localStorage.getItem('token');
 
-  // ნივთის წაშლა კალათიდან
-  removeItem(itemId: number): Observable<any> {
-  return this.http.delete(`${this.baseUrl}/Carts/items/${itemId}`).pipe(
+  if (!token) {
+    throw new Error('Unauthorized: No token found');
+  }
+
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+  });
+
+  const payload = { 
+    ProductId: productId, 
+    Quantity: quantity 
+  };
+
+  return this.http.post(`${this.baseUrl}/Carts/${userId.toString()}/items`, payload, { headers }).pipe(
     tap(() => {
-      // წაშლის მერე თავიდან ვტვირთავთ კალათას, რაც ავტომატურად განაახლებს ნავბარსაც
-      this.getCart(2).subscribe(); 
+      this.getCart(userId).subscribe();
     })
   );
 }
 
- // api.service.ts-ში ჩაამატე ეს ფუნქცია
 
-// api.service.ts-ში
-// api.service.ts
+ removeItem(itemId: number): Observable<any> {
 
+  const userId = Number(localStorage.getItem('userId')) || 1;
 
-getUserOrders(userId: number): Observable<any> {
-  // Swagger-ის მიხედვით: GET https://localhost:7083/api/Orders/user/{userId}
-  return this.http.get(`${this.baseUrl}/Orders/user/${userId}`);
+  return this.http.delete(`${this.baseUrl}/Carts/items/${itemId}`).pipe(
+    tap(() => {
+      this.getCart(userId).subscribe(); 
+    })
+  );
 }
 
 
+createOrder(orderData: any): Observable<any> {
+  return this.http.post<any>(`${this.baseUrl}/Orders`, orderData);
+}
 
-updateCartCount(count: number) {
+getOrdersByUserId(userId: number): Observable<any> {
+  return this.http.get<any>(`${this.baseUrl}/Orders/user/${userId}`);
+}
+
+  updateOrderStatus(orderId: number, status: string): Observable<any> {
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  return this.http.put(`${this.baseUrl}/Orders/${orderId}/status`, JSON.stringify(status), { headers });
+}
+
+  getUserOrders(userId: number): Observable<any> {
+  return this.http.get(`${this.baseUrl}/Orders/user/${userId}`);
+}
+
+  updateCartCount(count: number) {
     this.cartCount.next(count);
   }
-
-
-  // 1. ორდერის შექმნა (POST)
-  createOrder(orderData: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/Orders`, orderData);
-  }
-
-  // 2. სტატუსის განახლება (PUT)
-  updateOrderStatus(orderId: number, status: string): Observable<any> {
-    // ბექენდი ელოდება უბრალო სტრინგს Body-ში, ამიტომ ვფუთავთ JSON-ში
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.put(`${this.baseUrl}/Orders/${orderId}/status`, JSON.stringify(status), { headers });
-  }
-
-  // 3. კალათის დაცლა (DELETE)
-  clearCart(userId: number): Observable<any> {
+ 
+   clearCart(userId: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/Carts/clear/${userId}`);
   }
 
-  
+   clearCartData() {
+      this.cartCount.next(0); 
+    }
 
 
 }

@@ -1,0 +1,51 @@
+<div class="split-container">
+  <div class="visual-side">
+    <div class="overlay"></div>
+    <div class="visual-content">
+      <h2 class="brand-name">MarketGo</h2>
+      <p class="brand-slogan">საუკეთესო პროდუქტები, საუკეთესო ფასად.</p>
+      <div class="features-list">
+        <div class="feat-item"><i class="bi bi-check2-circle"></i> სწრაფი მიწოდება</div>
+        <div class="feat-item"><i class="bi bi-check2-circle"></i> 100% გარანტია</div>
+        <div class="feat-item"><i class="bi bi-check2-circle"></i> 24/7 მხარდაჭერა</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="login-form" class="form-side">
+    <div class="form-wrapper">
+      <div class="form-header">
+        <h1>შესვლა</h1>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        
+        <div class="floating-input mt-3">
+          <input type="email" formControlName="email" required placeholder=" ">
+          <label>ელ-ფოსტა</label>
+          
+          <span class="error-text" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid">
+            <i class="bi bi-exclamation-circle"></i> შეიყვანეთ სწორი ელ-ფოსტა
+          </span>
+        </div>
+
+        <div class="floating-input mt-4">
+          <input type="password" formControlName="password" required placeholder=" ">
+          <label>პაროლი</label>
+          
+          <span class="error-text" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+            <i class="bi bi-exclamation-circle"></i> პაროლი აუცილებელია (მინ. 7 სიმბოლო)
+          </span>
+        </div>
+
+        <button type="submit" class="main-submit-btn" [disabled]="loginForm.invalid">
+          ავტორიზაცია
+        </button>
+
+        <p class="login-redirect">
+          ჯერ არ გაქვს ანგარიში? <a routerLink="/register">დარეგისტრირდი</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>

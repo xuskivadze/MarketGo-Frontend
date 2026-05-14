@@ -1,0 +1,81 @@
+<div  class="split-container">
+  <div class="visual-side">
+    <div class="overlay"></div>
+    <div class="visual-content">
+      <h2 class="brand-name">MarketGo</h2>
+      <p class="brand-slogan">საუკეთესო პროდუქტები, საუკეთესო ფასად.</p>
+      <div class="features-list">
+        <div class="feat-item"><i class="bi bi-check2-circle"></i> სწრაფი მიწოდება</div>
+        <div class="feat-item"><i class="bi bi-check2-circle"></i> 100% გარანტია</div>
+        <div class="feat-item"><i class="bi bi-check2-circle"></i> 24/7 მხარდაჭერა</div>
+      </div>
+    </div>
+  </div >
+
+  <div  class="form-side">
+    <div class="form-wrapper">
+      <div class="form-header">
+        <h1>შექმენი ანგარიში</h1>
+        </div>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="row g-2"> <div class="col-6">
+            <div class="floating-input">
+              <input type="text" formControlName="firstName" required placeholder=" ">
+              <label>სახელი</label>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="floating-input">
+              <input type="text" formControlName="lastName" required placeholder=" ">
+              <label>გვარი</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="floating-input mt-3">
+  <input type="email" formControlName="email" required placeholder=" ">
+  <label>ელ-ფოსტა</label>
+  
+  <span class="error-text" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['email']">
+  <i class="bi bi-exclamation-circle"></i> ელ-ფოსტა უნდა შეიცავდეს "&#64;" სიმბოლოს
+</span>
+</div>
+
+        <div class="row g-2 mt-2">
+          <div class="col-6">
+            <div class="floating-input">
+              <input type="text" formControlName="city" required placeholder=" ">
+              <label>ქალაქი</label>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="floating-input">
+              <input type="text" formControlName="address" required placeholder=" ">
+              <label>მისამართი</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="floating-input mt-4">
+          <input type="password" formControlName="password" required placeholder=" ">
+          <label>პაროლი</label>
+          
+          <span class="error-text" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid">
+            <i class="bi bi-exclamation-circle"></i> პაროლი აუცილებელია (მინ. 7 სიმბოლო)
+          </span>
+        </div>
+
+        <button type="submit" class="main-submit-btn" [disabled]="registerForm.invalid">
+          რეგისტრაცია
+        </button>
+
+        <p class="login-redirect">
+          უკვე გაქვთ ანგარიში? <a routerLink="/login">შესვლა</a>
+        </p>
+
+        
+      </form>
+    </div>
+  </div>
+</div>

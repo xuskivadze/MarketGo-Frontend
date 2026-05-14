@@ -20,8 +20,6 @@
   padding: 0 20px 60px;
 }
 
-
-
 /* --- Layout Grid --- */
 .main-content-grid {
   display: grid;
@@ -393,67 +391,36 @@
   box-shadow: 0 10px 20px rgba(39, 174, 96, 0.2);
 }
 
-
-
-/* უკან გამოსასვლელი ღილაკი */
-
 .back-link {
 
   background: none;
-
   border: none;
-
-  color: #666;
-
+  color: #667;
   font-size: 1rem;
-
   cursor: pointer;
-
   display: flex;
-
   align-items: center;
-
   gap: 10px;
-
   margin-bottom: 30px;
-
   transition: color 0.3s;
-
 }
-
-
 
 .back-link:hover {
-
   color: #27ae60;
-
 }
 
-
-
-/* მთავარი ბლოკი */
 
 .product-grid {
 
   display: grid;
-
   grid-template-columns: 1fr 1.2fr;
-
   gap: 60px;
-
   background: white;
-
   padding: 40px;
-
   border-radius: 20px;
-
   box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-
   margin-bottom: 50px;
-
 }
-
-
 
 .thumbnails-row {
   display: flex;
@@ -477,7 +444,7 @@
 .thumb-box img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* რომ ფოტო არ გაიწელოს */
+  object-fit: contain;
 }
 
 .thumb-box:hover {
@@ -486,17 +453,15 @@
 }
 
 .thumb-box.active {
-  border-color: #3498db; /* შენი ბრენდის ფერი რაც არის */
+  border-color: #3498db;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* დავარეგულიროთ მთავარი ფოტო, რომ ყოველთვის კარგად ჩანდეს */
 .product-main-img {
   width: 100%;
   max-height: 500px;
   object-fit: contain;
 }
-
 
 .carousel-inner {
     background-color: #fff;
@@ -515,7 +480,6 @@
     opacity: 0.8;
 }
 
-/* რომ სურათი არ გაიწელოს არაპროპორციულად */
 .object-fit-contain {
     object-fit: contain !important;
 }
@@ -524,9 +488,6 @@
     margin-top: 70px;
 }
 
-
-
-/* --- 1. SALE ბეჯის საწყისი სტილი და ტრანზიცია --- */
 .sale-tag {
   position: absolute;
   top: 20px;
@@ -539,28 +500,16 @@
   font-size: 0.8rem;
   letter-spacing: 1px;
   z-index: 10;
-  
-  /* --- დაამატეთ ეს ხაზები --- */
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* რბილი გადიდების ეფექტი */
-  transform: scale(1); /* საწყისი ზომა */
-  will-change: transform; /* ოპტიმიზაცია */
-  pointer-events: none; /* რომ მაუსმა ბეჯში "გაიაროს" */
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: scale(1);
+  will-change: transform;
+  pointer-events: none;
 }
 
-/* --- 2. ეფექტი: როცა მაუსს მიიტანთ ქარდზე (image-card) --- */
 .image-card:hover .sale-tag {
-  transform: scale(1.07); /* ბეჯი დიდდება 15%-ით */
+  transform: scale(1.07);
 }
 
-/* --- 3. (გამორთეთ) წაშალეთ ან დააკომენტარეთ სურათის გადიდება --- */
-/* ჩვენ აღარ გვინდა, რომ სურათი დიდდებოდეს, ამიტომ ეს სტილი აღარ გვჭირდება: */
-/*
-.image-card:hover .product-main-img {
-  transform: scale(1.03); 
-}
-*/
-
-/* --- TOAST NOTIFICATION STYLES --- */
 .toast-container {
   z-index: 10000 !important;
   position: fixed;
@@ -568,17 +517,15 @@
   top: 100px;
   right: 20px;
   background: #ffffff;
-  padding: 10px 16px;
+  padding: 14px 20px;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
   border-left: 4px solid #27ae60;
   display: flex;
   flex-direction: column;
   min-width: 260px;
-  /* შემოსვლის ანიმაცია */
   animation: toastIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-
 
 .toast-content {
   display: flex;
@@ -588,7 +535,7 @@
 
 .toast-image-wrapper {
   position: relative;
-  width: 45px;  /* ზუსტად ისეთი ზომა, როგორიც ფილტრებში გვაქვს */
+  width: 45px;
   height: 45px;
   flex-shrink: 0;
 }
@@ -631,20 +578,21 @@
   max-width: 170px;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* თუ სახელი გრძელია, დააწერს სამ წერტილს */
+  text-overflow: ellipsis;
 }
 
 .added-label {
   font-size: 12px;
-  color: #27ae60;
+  color: #27ae60 !important;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.3px;
+  cursor: pointer;
 }
 
-/* პროგრეს ბარი ქვემოთ */
+
 .progress-bar {
-  height: 3px;
+  height: px;
   background: #27ae60;
   margin-top: 8px;
   width: 100%;
@@ -652,7 +600,7 @@
   animation: shrinkBar 2.5s linear forwards;
 }
 
-/* --- ANIMATIONS --- */
+
 @keyframes toastIn {
   from { transform: translateX(110%); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
@@ -663,25 +611,48 @@
   to { width: 0%; }
 }
 
-/* --- MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
   .toast-container {
-    top: 85px;       /* მობილურზე ოდნავ მაღლა */
-    right: 10px;     /* მარჯვენა კიდეზე მიკვრა */
-    left: auto;      /* რომ მარცხნიდან არ დაიფაროს ტექსტი */
+    top: 85px;
+    right: 10px;
+    left: auto;
     max-width: 88%;
     min-width: 220px;
     padding: 8px 12px;
   }
   
   .toast-product-info {
-    max-width: 140px; /* მობილურზე უფრო მოკლე ტექსტი */
+    max-width: 140px;
     font-size: 12px;
   }
 
   .toast-image-wrapper {
-    width: 40px;      /* ოდნავ პატარა ფოტო მობილურზე */
+    width: 40px;
     height: 40px;
   }
 }
 
+.progress-bar {
+  height: 3px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: width 2.5s linear;
+}
+
+.success-text {
+  color: #2ecc71;
+  font-weight: 500;
+  display: block;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.auth-link {
+  color: #3498db;
+  text-decoration: underline;
+  font-weight: 500;
+  display: block;
+  font-size: 13px;
+  margin-top: 4px;
+}

@@ -1,22 +1,18 @@
 <div class="product-page-wrapper" *ngIf="product">
   <div class="container">
-    <!-- Back Navigation -->
     <nav class="nav-header">
        <button class="back-link" routerLink="/">← მთავარზე დაბრუნება</button>
     </nav>
 
     <div class="main-content-grid">
-      <!-- Media Gallery Section -->
       <div class="gallery-column">
         <div class="image-card">
           <div class="badge-container" *ngIf="product.price > product.currentPrice">
             <span class="sale-tag">SALE</span>
           </div>
-          <!-- აქ product.pictureUrl შევცვალეთ selectedImage-ით -->
           <img [src]="selectedImage" [alt]="product.name" class="product-main-img">
         </div>
 
-        <!-- დამატებული სლაიდერის პატარა ფოტოები (Thumbnails) -->
         <div class="thumbnails-row" *ngIf="product.images && product.images.length > 1">
           <div class="thumb-box" 
                *ngFor="let img of product.images" 
@@ -27,7 +23,6 @@
         </div>
       </div>
 
-      <!-- Purchase Details Section -->
       <div class="details-column">
         <div class="info-header">
           <span class="category-pill">{{product.categoryName}}</span>
@@ -58,7 +53,6 @@
       </div>
     </div>
 
-    <!-- Reviews Section -->
     <section class="reviews-layout">
       <div class="reviews-header-block">
         <h2 class="section-title">მომხმარებლის შეფასებები</h2>
@@ -98,28 +92,41 @@
       </ng-template>
 
 
-      
-<!-- Toast შეტყობინება -->
-<!-- Toast შეტყობინება -->
 <div class="toast-container" 
      *ngIf="showToast" 
-     (click)="goToCart()" 
-     style="cursor: pointer;">
+     (click)="!currentToastImage ? null : goToCart()" 
+     [style.cursor]="currentToastImage ? 'pointer' : 'default'">
+  
   <div class="toast-content">
-    <div class="toast-image-wrapper">
+    <div class="toast-image-wrapper" *ngIf="currentToastImage">
       <img [src]="currentToastImage" alt="product">
       <div class="mini-check">✓</div>
     </div>
     
+    <div class="error-icon" *ngIf="!currentToastImage" style="font-size: 22px; ">
+      ⚠️
+    </div>
+
     <div class="message-text">
       <p class="toast-product-info">{{ toastMessage }}</p>
-      <span class="added-label">კალათაშია (გადადი ნახვაზე)</span>
+      
+      <span class="added-label" *ngIf="currentToastImage">
+        კალათაშია (გადადი ნახვაზე)
+      </span>
+
+      <span class="added-label" 
+      *ngIf="!currentToastImage && toastMessage.includes('ავტორიზაცია')" 
+      (click)="router.navigate(['/login'])" 
+      style="color: #3498db; text-decoration: underline; cursor: pointer;">
+    გაიარე ავტორიზაცია
+</span>
     </div>
   </div>
-  <div class="progress-bar"></div>
+  
+  <div class="progress-bar" [style.background-color]="currentToastImage ? '#2ecc71' : '#e74c3c'"></div>
 </div>
-    </section>
 
+    </section>
     
   </div>
 </div>

@@ -2,10 +2,14 @@
   --shopnet-green: #27ae60;
 }
 
-.shopnet-container { background-color: #fcfcfc; min-height: 90vh; }
-.color-green { color: var(--shopnet-green); }
+.shopnet-container { 
+  background-color: #fcfcfc;
+   min-height: 90vh;
+  }
+.color-green { 
+  color: var(--shopnet-green); 
+ }
 
-/* Header - აქ გქონდა პრობლემა */
 .header-main-card {
   background: white;
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
@@ -14,7 +18,6 @@
   padding: 0 20px;
 }
 
-/* Item Card */
 .item-card {
   background: white;
   border-radius: 20px;
@@ -36,7 +39,6 @@
   object-fit: contain;
 }
 
-/* Stepper */
 .modern-qty {
   display: flex;
   align-items: center;
@@ -54,9 +56,11 @@
   font-weight: bold;
 }
 
-.qty-num { padding: 0 15px; font-weight: 700; }
+.qty-num {
+   padding: 0 15px; 
+   font-weight: 700; 
+  }
 
-/* Summary */
 .summary-sticky {
   background: white;
   border-radius: 30px;
@@ -73,7 +77,6 @@
   font-weight: 700;
 }
 
-/* Shadow-ების მოცილება შიდა ფლექსებიდან */
 .shadow-none { box-shadow: none !important; }
 .h-auto { height: auto !important; }
 
@@ -96,29 +99,27 @@
 .img-box img {
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain; /* ეს სურათს სწორად ჩასვამს ჩარჩოში */
+  object-fit: contain;
 }
 
-/* ფასის სტილი - უფრო დიდი და გამოკვეთილი */
 .price-display {
     min-width: 100px;
 }
 
 .price-tag {
-    font-size: 1.3rem; /* უფრო დიდი ფონტი */
+    font-size: 1.3rem;
     font-weight: 800;
     color: var(--shopnet-green);
     letter-spacing: -0.5px;
 }
 
-/* წითელი და ლამაზი X ღილაკი */
 .btn-remove-red {
     width: 36px;
     height: 36px;
-    border-radius: 10px; /* ოდნავ მომრგვალებული კუთხეები */
+    border-radius: 10px;
     border: none;
-    background: #fff5f5; /* ნაზი წითელი ფონი */
-    color: #ff4757;      /* მკვეთრი წითელი X */
+    background: #fff5f5;
+    color: #ff4757;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -127,156 +128,128 @@
 }
 
 .btn-remove-red:hover {
-    background: #ff4757; /* გადავა მუქ წითელზე */
-    color: white;        /* X გახდება თეთრი */
+    background: #ff4757;
+    color: white;
     transform: scale(1.1);
     box-shadow: 0 4px 10px rgba(255, 71, 87, 0.2);
 }
 
 .btn-remove-red i {
     font-size: 1.1rem;
-    -webkit-text-stroke: 0.5px; /* უფრო მკაფიო ხატულა */
+    -webkit-text-stroke: 0.5px;
 }
 
-/* რეფრეშის საწინააღმდეგო დამატებითი დაზღვევა */
 .modern-qty button:focus, 
 .btn-remove-red:focus {
     outline: none !important;
     box-shadow: none !important;
 }
 
-
-
-/* --- პროდუქტის ბარათის საბაზისო მდგომარეობა --- */
 .animate-product-card {
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* გლუვი გადასვლა */
-  border: none; /* ბორდერის მოცილება */
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: none;
   background-color: white;
-  border-radius: 20px; /* შენი დიზაინის შესაბამისი */
+  border-radius: 20px;
 }
 
-/* --- Hover ეფექტი (მხოლოდ აწევა და ჩრდილი) --- */
 .animate-product-card:hover {
-  /* transform: translateY(-6px);  */
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08) !important; /* რბილი და ლამაზი ჩრდილი */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08) !important;
 }
 
-/* --- მხოლოდ ფოტოს ანიმაცია --- */
 .animate-product-card .img-box img {
-  transition: transform 0.5s ease; /* ფოტოს ტრიალის სისწრაფე */
+  transition: transform 0.5s ease;
 }
 
 .animate-product-card:hover .img-box img {
-  /* ფოტოს ოდნავ ტრიალი და მცირე მასშტაბირება */
   transform: scale(1.08) rotate(-4deg); 
 }
 
-/* --- X ღილაკი და ფასი რჩება უცვლელი (ანიმაციის გარეშე) --- */
 .btn-remove-red {
-  /* აქ აღარ გვაქვს Hover ანიმაციები, რომ არ აციმციმდეს */
   transition: none; 
 }
 
 .price-tag {
-  /* ფასიც სტატიკურია */
   transition: none;
 }
 
-
-
-
-/* კონტეინერი */
 .cart-items-container {
   max-height: 550px;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-right: 15px; /* ადგილი სქროლისთვის */
+  padding-right: 15px;
 }
 
-/* სქროლბარის სრული სტილი (Chrome, Safari, Edge) */
 .cart-items-container::-webkit-scrollbar {
-  width: 4px; /* ძალიან თხელი ხაზი */
+  width: 4px;
 }
 
 .cart-items-container::-webkit-scrollbar-track {
-  background: transparent; /* ფონი საერთოდ არ ჩანდეს */
+  background: transparent;
 }
 
 .cart-items-container::-webkit-scrollbar-thumb {
-  background: #e0e0e0; /* ძალიან ნაზი ფერი */
+  background: #e0e0e0;
   border-radius: 10px;
 }
 
 .cart-items-container::-webkit-scrollbar-thumb:hover {
-  background: #27ae60; /* მხოლოდ ჰოვერზე გამწვანდეს */
+  background: #27ae60;
 }
 
-/* Firefox-ისთვის */
 .cart-items-container {
   scrollbar-width: thin;
   scrollbar-color: #e0e0e0 transparent;
 }
 
-
 .summary-sticky {
-  position: -webkit-sticky; /* Safari-სთვის */
+  position: -webkit-sticky;
   position: sticky;
-  top: 20px; /* ეკრანის ზედა ნაწილიდან დაშორება გაჩერებისას */
+  top: 20px;
   background: white;
   border-radius: 25px;
   padding: 30px;
   z-index: 10;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* ნაზი ჩრდილი */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
-/* იმისათვის რომ sticky-მ იმუშაოს, მის მშობელ .row-ს არ უნდა ჰქონდეს overflow: hidden */
 .row {
-  align-items: flex-start; /* ეს ეხმარება sticky-ს სწორად მუშაობაში */
-}
-
-
-/* --- მთავარი კონტეინერის და სვეტების მართვა --- */
-.row.g-4 {
-  display: flex;
-  flex-wrap: wrap; /* მობილურისთვის */
   align-items: flex-start;
 }
 
-/* დესკტოპზე (დიდ ეკრანებზე) აიძულე გვერდიგვერდ დგომა */
+.row.g-4 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
 @media (min-width: 992px) {
   .row.g-4 {
-    flex-wrap: nowrap !important; /* არასოდეს ჩამოვა ქვემოთ */
+    flex-wrap: nowrap !important;
   }
 
   .col-lg-8 {
-    flex: 0 0 68% !important; /* მარცხენა მხარე */
+    flex: 0 0 68% !important;
     max-width: 68% !important;
   }
 
   .col-lg-4 {
-    flex: 0 0 32% !important; /* მარჯვენა მხარე */
+    flex: 0 0 32% !important;
     max-width: 32% !important;
   }
 }
 
-
-/* --- სქროლის სისტემა (მხოლოდ პროდუქტებზე) --- */
 .col-lg-8 {
-  max-height: 550px; /* 4 ნივთის სიმაღლე */
+  max-height: 550px;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-right: 10px;
-  
-  /* სქროლბარის დამალვა Firefox-ისთვის */
+  padding-right: 10px;  
   scrollbar-width: none; 
 }
 
-/* სქროლბარის დამალვა Chrome/Safari-სთვის (სუფთა დიზაინი) */
 .col-lg-8::-webkit-scrollbar {
   display: none;
 }
 
-/* --- პროდუქტის ბარათის ანიმაციები --- */
 .animate-product-card {
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   border: none !important;
@@ -284,13 +257,11 @@
   border-radius: 18px;
 }
 
-/* ნაზი აწევა და ჩრდილი ჰოვერზე */
 .animate-product-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07) !important;
 }
 
-/* მხოლოდ ფოტოს როტაცია და ზომა */
 .img-box img {
   transition: transform 0.4s ease;
 }
@@ -299,7 +270,6 @@
   transform: scale(1.1) rotate(-5deg);
 }
 
-/* --- მარჯვენა მხარის "გაყინვა" (Sticky) --- */
 .summary-sticky {
   position: sticky;
   top: 20px;
@@ -309,10 +279,6 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04) !important;
 }
 
-/* --- ფასის და ღილაკების სტილი --- */
-
-
-/* წითელი X ღილაკი */
 .btn-remove-red {
   width: 38px;
   height: 38px;
@@ -331,7 +297,6 @@
   color: white;
 }
 
-/* --- რაოდენობის კონტროლი --- */
 .modern-qty {
   display: flex;
   align-items: center;
@@ -349,10 +314,9 @@
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-/* --- მობილურის რესპონსივი --- */
 @media (max-width: 991px) {
   .col-lg-8 {
-    max-height: none; /* მობილურზე სქროლი აღარ გვინდა */
+    max-height: none;
     padding-right: 0;
   }
   
@@ -371,36 +335,26 @@
   margin-bottom: 2rem !important;
 }
 
-
 .cart-header-card {
   background: #ffffff;
   padding: 25px 35px;
   border-radius: 20px;
-  
-  /* ქვედა ბორდერი - მკაფიო, მაგრამ ნაზი */
   border-bottom: 4px solid #f1f3f5; 
-  
-  /* ლამაზი, გაბნეული ჩრდილი ქვემოთ */
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-  
-  /* არავითარი transform ან მოძრაობა აქ */
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* ხაზის ფერის აქცენტი (სურვილისამებრ, მწვანე აქცენტისთვის) */
 .cart-header-card {
   position: relative;
   overflow: hidden;
 }
 
-/* თუ გინდა, რომ ბორდერს ჰქონდეს მწვანე ელფერი */
 .cart-header-card {
   border-bottom: 3px solid rgba(39, 174, 96, 0.15);
 }
 
-/* ტექსტის და ღილაკების სტატიკური სტილი */
 .cart-header-card h1 {
   font-size: 1.8rem;
   color: #2d3436;
@@ -411,15 +365,12 @@
   font-weight: 500;
 }
 
-/* ღილაკების ჩრდილიც რომHeader-ს შეესაბამებოდეს */
 .header-btns .btn-light {
   background: #ffffff;
   border: 1px solid #f1f3f5;
   box-shadow: 0 4px 10px rgba(0,0,0,0.03);
 }
 
-
-/* მთავარი ჰედერი */
 .cart-header-card {
   display: flex;
   justify-content: space-between;
@@ -431,20 +382,18 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 }
 
-/* ღილაკების კონტეინერი */
 .header-btns {
   display: flex;
-  flex-direction: column-reverse; /* ატრიალებს თანმიმდევრობას: უკან ავა ზემოთ, დაცლა ჩამოვა ქვემოთ */
+  flex-direction: column-reverse;
   gap: 8px;
-  align-items: flex-end; /* მარჯვნივ გასწორება */
+  align-items: flex-end;
 }
 
-/* მობილურის სპეციფიკური ზომები */
 @media (max-width: 576px) {
   .header-btns .btn {
     padding: 8px 18px;
     font-size: 0.85rem;
-    width: 100%; /* რომ ორივე ღილაკს ერთი სიგანე ჰქონდეს */
+    width: 100%;
     min-width: 110px;
     margin: 0 !important;
     display: flex;
@@ -464,74 +413,57 @@
   }
 }
 
-/* დესკტოპზე ისევ გვერდიგვერდ და ჩვეულებრივი მიმდევრობით */
 @media (min-width: 768px) {
   .header-btns {
-    flex-direction: row; /* დიდ ეკრანზე ისევ ჰორიზონტალურია */
+    flex-direction: row;
     align-items: center;
     gap: 12px;
   }
 }
 
-
-/* --- Premium Modern "უკან" ღილაკი --- */
 .btn-light {
-  /* ფონი: ძალიან ნაზი ნაცრისფერი გრადიენტი */
   background: linear-gradient(145deg, #f8f9fa, #e9ecef) !important;
   color: #495057 !important;
   border: 1px solid #dee2e6 !important;
   border-radius: 12px !important;
-  
-  /* ზომები */
   margin-right: 10px;
   padding: 5px 32px !important;
   font-weight: 600 !important;
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  
-  /* ანიმაცია */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04) !important;
   cursor: pointer;
 }
 .btn{
   border-radius: 12px !important;
-
 }
 
-
-
-/* ხატულა (ისარი) */
 .btn-light i {
   font-size: 1.1rem;
-  color: #6c757d; /* ნაცრისფერი ხატულა, რომელიც ჰოვერზე გაცოცხლდება */
+  color: #6c757d;
   transition: all 0.3s ease !important;
 }
 
-/* --- HOVER ეფექტი --- */
 .btn-light:hover {
-  /* ჰოვერზე ცოტა უფრო მუქი ნაცრისფერი */
   background: #dee4ea !important;
   border-color: #cbd5e1 !important;
   color: #212529 !important;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08) !important;
 }
 
-/* ისრის მოძრაობა */
 .btn-light:hover i {
   transform: translateX(-4px);
-  color: #27ae60; /* მხოლოდ ჰოვერზე რომ "აინთოს" შენი მწვანე */
+  color: #27ae60;
 }
 
-/* --- ACTIVE (დაჭერის) ეფექტი --- */
 .btn-light:active {
   transform: translateY(0) scale(0.96);
   background: #ced4da !important;
   box-shadow: inset 0 2px 4px rgba(167, 48, 48, 0.1) !important;
 }
 
-/* მობილურისთვის */
 @media (max-width: 576px) {
   .btn-light {
     padding: 8px 18px !important;
@@ -542,26 +474,18 @@
   }
 }
 
-
-
-/* --- ფერების გლობალური განახლება --- */
-
-/* 1. Bootstrap-ის ტექსტის მწვანე ფერის ჩანაცვლება */
 .text-success {
   color: #2ECC71 !important;
 }
 
-/* 2. შენი სათაურის ხატულის ფერის ჩანაცვლება */
 .color-green {
   color: #2ECC71 !important;
 }
 
-/* 3. "სულ" ჯამური ფასის ფერის ჩანაცვლება */
 .summary-row .color-green {
   color: #2ECC71 !important;
 }
 
-/* 4. თუ სადმე "ყიდვის გაფორმების" ღილაკიც ამ ფერზე გინდა */
 .btn-success-modern {
   background-color: #2ECC71 !important;
   border-color: #2ECC71 !important;
@@ -569,50 +493,43 @@
 }
 
 .btn-success-modern:hover {
-  background-color: #27ae60 !important; /* ოდნავ მუქი ჰოვერისთვის */
+  background-color: #27ae60 !important;
   border-color: #27ae60 !important;
 }
 
-/* 5. "უკან" ღილაკის ხატულა რომ დაემთხვეს */
 .btn-light i {
   color: #2ECC71 !important;
 }
 
-/* "დაცლა" ღილაკის ჩარჩოს შერბილება */
 .btn-outline-danger {
-  border: 1px solid rgba(220, 53, 69, 0.2) !important; /* ძალიან ნაზი, გამჭვირვალე წითელი ჩარჩო */
+  border: 1px solid rgba(220, 53, 69, 0.2) !important;
   color: #dc3545 !important;
   background-color: transparent !important;
   transition: all 0.3s ease !important;
 }
 
-/* ჰოვერზე (მაუსის მიტანისას) ეფექტი */
 .btn-outline-danger:hover {
    background-color: rgba(220, 53, 69, 0.1) !important;
-  border-color: rgba(220, 53, 69, 0.5) !important; /* ჩარჩო ცოტა უფრო მკაფიო ხდება */
-  color: #bb2d3b !important;
+   border-color: rgba(220, 53, 69, 0.5) !important;
+   color: #bb2d3b !important;
 }
 
-/* დაჭერისას */
 .btn-outline-danger:active {
   background-color: rgba(220, 53, 69, 0.1) !important;
   transform: translateY(0) scale(0.96);
 }
 
-
-
-/* ეს კოდი აიძულებს ფანჯარას ამოხტეს ყველაფრის ზემოთ */
 .payment-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* მუქი ფონი */
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000 !important; /* ძალიან მაღალი ციფრი, რომ ნავბარსაც გადაეფაროს */
+  z-index: 2000 !important;
 }
 
 .payment-modal {
@@ -625,8 +542,6 @@
   position: relative;
 }
 
-
-/* მიმართვა ID-ით */
 #checkoutBtn {
   width: 100%;
   padding: 15px !important;
@@ -650,15 +565,12 @@
   border-color: #27ae60 !important;
 }
 
-
-
-/* Overlay - მუქი და ბუნდოვანი ფონი */
 .payment-overlay {
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
   background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px); /* ფონის დაბინდვა */
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -666,7 +578,6 @@
   padding: 15px;
 }
 
-/* მოდალის კონტეინერი */
 .payment-modal {
   background: white;
   width: 100%;
@@ -730,7 +641,6 @@
   background: #fafffb;
 }
 
-/* გადახდის ღილაკი */
 .pay-btn {
   width: 100%;
   padding: 15px;
@@ -747,7 +657,6 @@
 
 .pay-btn:hover:not(:disabled) {
   background: #27ae60;
-  /* transform: translateY(-2px); */
   box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
 }
 
@@ -756,7 +665,6 @@
   cursor: not-allowed;
 }
 
-/* ლოგოების სექცია */
 .payment-partners {
   display: flex;
   justify-content: center;
@@ -771,7 +679,6 @@
   object-fit: contain;
 }
 
-/* რესპონსიულობა მობილურისთვის */
 @media (max-width: 480px) {
   .payment-modal {
     max-width: 100%;
@@ -781,17 +688,14 @@
   }
 }
 
-
-/* საერთო სტილი ყველა ეკრანისთვის */
 .payment-modal {
   background: white;
-  width: calc(100% - 40px); /* ეკრანის გვერდებიდან 20-20px დაშორება */
-  max-width: 400px; /* მაქსიმალური სიგანე */
+  width: calc(100% - 40px);
+  max-width: 400px;
   border-radius: 24px;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
   position: relative;
   overflow: hidden;
-  /* ანიმაცია, რომ შუიდან გამოჩნდეს */
   animation: modalZoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -800,21 +704,20 @@
   to { transform: scale(1); opacity: 1; }
 }
 
-/* მობილურის სპეციფიკური კორექტირება */
 @media (max-width: 480px) {
   .payment-modal {
-    width: 90%; /* გვერდებიდან დაშორება მობილურზე */
-    margin: 0 auto; /* ცენტრირება */
-    max-height: 90vh; /* რომ ძალიან არ გაგრძელდეს */
-    overflow-y: auto; /* თუ შიგთავსი ბევრია, ჩამოისქროლოს */
+    width: 90%;
+    margin: 0 auto;
+    max-height: 90vh;
+    overflow-y: auto;
   }
 
   .modal-body-custom {
-    padding: 20px; /* ცოტა ნაკლები padding მობილურისთვის */
+    padding: 20px;
   }
 
   .payment-partners img {
-    height: 18px; /* ლოგოები ოდნავ დავაპატარავოთ */
+    height: 18px;
   }
 }
 
@@ -822,39 +725,32 @@
   font-size: 28px;
 }
 
-
-
 .close-icon:hover{
   color: red;
 }
 
-
-/* მთავარი კონტეინერი */
 .empty-cart-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 60vh; /* ეკრანის დიდ ნაწილს დაიკავებს */
+  min-height: 60vh;
   padding: 40px 20px;
 }
 
-/* სურათის რესპონსიულობა */
 .empty-img {
   width: 100%;
-  max-width: 250px; /* დესკტოპზე მაქსიმალური ზომა */
+  max-width: 250px;
   height: auto;
   opacity: 0.8;
   transition: transform 0.3s ease;
 }
 
-/* სათაურის ზომები */
 .empty-title {
   font-size: 2rem;
   color: #2d3436;
 }
 
-/* მობილურის ვერსია (Media Queries) */
 @media (max-width: 576px) {
   .empty-cart-card {
     min-height: 50vh;
@@ -862,14 +758,13 @@
   }
 
   .empty-img {
-    max-width: 180px; /* მობილურზე უფრო პატარა სურათი */
+    max-width: 180px;
   }
 
   .empty-title {
-    font-size: 1.5rem; /* უფრო პატარა სათაური */
+    font-size: 1.5rem;
   }
 
-  /* ღილაკი მობილურზე უფრო მეტ ადგილს რომ იკავებდეს */
   .btn-success-modern {
     width: 100%;
     max-width: 280px;
@@ -878,7 +773,6 @@
   }
 }
 
-/* ანიმაცია, რომელიც HTML-ში გიწერია */
 .animate-in {
   animation: fadeInDown 0.6s ease-out;
 }
@@ -897,8 +791,6 @@
 .bi-credit-card-fill{
   padding-right: 4px;
 }
-
-
 
 .badge-sale {
   position: absolute;
@@ -921,15 +813,14 @@
 
 .price-tag-sale {
   font-size: 1.1rem;
-  color: #ff4757; /* ფასდაკლების ფერი */
+  color: #ff4757;
 }
-
 
 .badge-sale {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: #ff4757; /* წითელი ფერი */
+  background-color: #ff4757;
   color: white;
   padding: 3px 10px;
   border-radius: 5px;
@@ -944,34 +835,30 @@
   color: #adb5bd;
 }
 
-
-
-/* კონტეინერი, რომელშიც სურათი და ბეჯია */
 .img-box {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: visible; /* რომ ბეჯი არ ჩაიჭრას */
+  overflow: visible;
 }
 
-/* დახვეწილი და პატარა SALE ბეჯი */
 .badge-sale {
   position: absolute;
-  top: 2px;           /* ცოტათი ჩამოწეული ზემოდან */
-  left: 1px;          /* ცოტათი შეწეული გვერდიდან */
-  background: #e74c3c; /* გრადიენტი უფრო ცოცხალია */
+  top: 2px;
+  left: 1px;
+  background: #e74c3c;
   color: white;
-  font-size: 9px;    /* პატარა და მკაფიო ზომა */
-  font-weight: 700;   /* სქელი შრიფტი */
-  padding: 2px 8px;   /* შიდა დაშორება */
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 8px;
   text-transform: uppercase;
-  border-radius: 6px; /* ოდნავ მომრგვალებული კუთხეები */
+  border-radius: 6px;
   z-index: 10;
   letter-spacing: 0.5px;
-  box-shadow: 0 2px 8px rgba(255, 71, 87, 0.4); /* წითელი ჩრდილი ეფექტისთვის */
-  pointer-events: none; /* რომ სურათზე კლიკს ხელი არ შეუშალოს */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* თხელი თეთრი კანტი */
+  box-shadow: 0 2px 8px rgba(255, 71, 87, 0.4);
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 
