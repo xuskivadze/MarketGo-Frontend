@@ -1430,6 +1430,10 @@ transform: scale(1.15);
     margin: 0 2px;
     font-size: 0.85rem;
   }
+  .pagination-container{
+    margin-top: 20px !important;
+    margin-bottom: 15px !important;
+  }
 
   .pagination-container {
     overflow-x: auto;
@@ -1437,7 +1441,7 @@ transform: scale(1.15);
     padding: 10px 0;
   }
   .cat-btn{
-    font-size: 12px;
+    font-size: 14px;
     padding-bottom: 7px;
     padding-top: 7px;
   }
@@ -1564,7 +1568,7 @@ button:focus,
     margin-bottom: 12px !important;             /* დაშორება ქვედა სექციამდე (ქარდებამდე) */
     align-items: center !important;
     width: 100% !important;
-    background-color: #F4F9F6;
+    background-color: #F1F3F2;
     margin-bottom: 20px !important;
   }
 

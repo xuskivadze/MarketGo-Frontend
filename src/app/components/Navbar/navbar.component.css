@@ -131,7 +131,6 @@
 
   .btn-reg {
     width: 100%;
-    margin-bottom: 10px;
   }
 
   .cart-btn {
@@ -477,8 +476,10 @@
     justify-content: center;
     border: none !important;
     background-color: #f8f9fa;
-    height: 48px;
+    height: 44px;
     border-radius: 12px;
+    margin-bottom: 5px;
+
   }
 
   .btn-logout-minimal {
@@ -493,6 +494,11 @@
 .main-title{
        font-size: 2.3rem;
 }
-
+.cart-btn{
+  margin-top: 0px;
+}
+.hero-section{
+  padding-bottom: 47px;
+}
    
 }

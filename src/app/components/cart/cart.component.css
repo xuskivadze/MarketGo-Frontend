@@ -771,6 +771,18 @@
     padding: 15px !important;
     font-size: 1rem;
   }
+
+  .price-tag {
+    font-size: 1.1rem;
+}
+
+.fw-bold{
+  font-size: 1.15rem !important;
+}
+.bg-light-end{
+  padding-top: 0px !important;
+}
+
 }
 
 .animate-in {
@@ -862,3 +874,48 @@
 }
 
 
+
+/* ==========================================================================
+     CART HEADER RESPONSIVE OPTIMIZATION
+     ========================================================================== */
+@media (max-width: 776px) {
+  /* კალათის ჰედერის მთავარი კონტეინერი */
+  .cart-header-card {
+    flex-direction: column !important; /* მობილურზე სათაური და ღილაკები ჯდება ერთმანეთის ქვეშ */
+    align-items: flex-start !important; /* სწორდება მარცხენა კიდეზე */
+    gap: 12px !important;               /* მცირე დაშორება სათაურსა და ღილაკებს შორის */
+    margin-bottom: 1.5rem !important;   /* შემცირებული ქვედა მანძილი `mb-5`-დან */
+    padding: 0 4px !important;          /* მცირე გვერდითა პედინგი */
+  }
+
+  /* სათაურის სექცია */
+  .title-area h1 {
+    font-size: 1.5rem !important;       /* ოდნავ დაპატარავებული სათაური */
+  }
+
+  .title-area .text-count {
+    font-size: 0.85rem !important;      /* კომპაქტური ნივთების რაოდენობის ტექსტი */
+    color: #7f8c8d !important;
+  }
+
+  /* ღილაკების კონტეინერი */
+  .header-btns {
+    display: flex !important;
+    width: 100% !important;             /* ღილაკების ბლოკი იკავებს მთელ სიგანეს */
+    gap: 8px !important;                /* თანაბარი დაშორება ღილაკებს შორის */
+  }
+
+  /* ორივე ღილაკის საერთო სტილი მობილურზე */
+  .header-btns .btn {
+    flex: 1 !important;                 /* ორივე ღილაკი ხდება თანაბარი ზომის და ინაწილებს სიგანეს */
+    padding: 0.55rem 0.5rem !important; /* ოპტიმალური შიდა დაშორება, `px-4` უქმდება */
+    font-size: 0.85rem !important;      /* ოდნავ პატარა ფონტი, რომ ტექსტი გარანტირებულად დაეტიოს */
+    margin: 0 !important;               /* Bootstrap-ის `me-2`-ის გაუქმება აირევის თავიდან ასაცილებლად */
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;     /* ტექსტი რომ არ გადავიდეს მეორე ხაზზე */
+    border-radius: 8px !important;
+  }
+
+}
