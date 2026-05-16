@@ -441,7 +441,6 @@
 }
 
 .btn-light i {
-  font-size: 1.1rem;
   color: #6c757d;
   transition: all 0.3s ease !important;
 }
@@ -908,7 +907,7 @@
   .header-btns .btn {
     flex: 1 !important;                 /* ორივე ღილაკი ხდება თანაბარი ზომის და ინაწილებს სიგანეს */
     padding: 0.55rem 0.5rem !important; /* ოპტიმალური შიდა დაშორება, `px-4` უქმდება */
-    font-size: 0.85rem !important;      /* ოდნავ პატარა ფონტი, რომ ტექსტი გარანტირებულად დაეტიოს */
+    font-size: 0.90rem !important;      /* ოდნავ პატარა ფონტი, რომ ტექსტი გარანტირებულად დაეტიოს */
     margin: 0 !important;               /* Bootstrap-ის `me-2`-ის გაუქმება აირევის თავიდან ასაცილებლად */
     display: inline-flex !important;
     align-items: center !important;
