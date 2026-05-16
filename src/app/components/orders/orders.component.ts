@@ -20,30 +20,37 @@ export class OrdersComponent implements OnInit {
     this.loadOrders();
   }
 
- loadOrders(): void {
 
-  const userId = Number(localStorage.getItem('userId')) || 1;
-
-  this.apiService.getOrdersByUserId(userId).subscribe({
-    next: (res: any) => {
-      console.log('Orders received:', res);
-      
-      if (res && res.isSuccess) {
-        this.orders = res.data || [];
-        
-      } else {
-        this.orders = Array.isArray(res) ? res : [];
-      }
-      
-      this.loading = false;
-    },
-    error: (err) => {
-      console.error('Error fetching orders:', err);
-      this.loading = false;
+loadOrders(): void {
+    const currentUserId = localStorage.getItem('userId');
+    
+    if (!currentUserId) {
       this.orders = [];
+      this.loading = false;
+      return;
     }
-  });
-}
+
+    const userId = Number(currentUserId);
+
+    this.apiService.getOrdersByUserId(userId).subscribe({
+      next: (res: any) => {
+        console.log('Orders received:', res);
+        
+        if (res && res.isSuccess) {
+          this.orders = res.data || [];
+        } else {
+          this.orders = Array.isArray(res) ? res : [];
+        }
+        
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Error fetching orders:', err);
+        this.loading = false;
+        this.orders = [];
+      }
+    });
+  }
 
   getStatusClass(status: string): string {
     switch (status.toUpperCase()) {

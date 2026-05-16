@@ -32,37 +32,44 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onLogin() {
-  if (this.loginForm.valid) {
-    this.apiService.login(this.loginForm.value).subscribe({
-      next: (response: any) => {
-        const token = typeof response === 'string' ? response : response.token;
+ onLogin() {
+    if (this.loginForm.valid) {
+      this.apiService.login(this.loginForm.value).subscribe({
+        next: (response: any) => {
+          const token = typeof response === 'string' ? response : response.token;
 
-        if (token) {
-          localStorage.setItem('token', token);
-          
+          if (token) {
+            localStorage.setItem('token', token);
+            
+            const tokenData = JSON.parse(atob(token.split('.')[1]));
+            const userId = tokenData.nameid || tokenData['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+            if (userId) {
+              localStorage.setItem('userId', userId.toString());
+            }
+
+            this.apiService.checkAuthStatus();
+            
+            Swal.fire({
+              title: 'წარმატებული ავტორიზაცია!',
+              text: 'მოგესალმებით MarketGo-ზე',
+              icon: 'success',
+              timer: 2000,
+              showConfirmButton: false
+            }).then(() => {
+              this.router.navigate(['/']);
+            });
+          }
+        },
+        error: (err) => {
+          console.error("ლოგინის შეცდომა:", err);
           Swal.fire({
-            title: 'წარმატებული ავტორიზაცია!',
-            text: 'მოგესალმებით MarketGo-ზე',
-            icon: 'success',
-            timer: 2000,
-            showConfirmButton: false
-          }).then(() => {
-            this.router.navigate(['/']);
-            window.location.reload();
+            title: 'შეცდომა!',
+            text: 'იმეილი ან პაროლი არასწორია',
+            icon: 'error',
+            confirmButtonColor: '#e94c49'
           });
         }
-      },
-      error: (err) => {
-        console.error("ლოგინის შეცდომა:", err);
-        Swal.fire({
-          title: 'შეცდომა!',
-          text: 'იმეილი ან პაროლი არასწორია',
-          icon: 'error',
-          confirmButtonColor: '#e94c49'
-        });
-      }
-    });
-  } 
-}
+      });
+    } 
+  }
 }

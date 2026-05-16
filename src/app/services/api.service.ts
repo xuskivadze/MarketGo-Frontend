@@ -44,15 +44,22 @@ checkAuthStatus() {
   }
 
 login(model: LoginDto): Observable<string> {
-  return this.http.post(`${this.apiUrl}/login`, model, { responseType: 'text' }).pipe(
-    tap(token => {
-      if (token) {
-        localStorage.setItem('userId', '1');
-        this.authStatus.next(true);
-      }
-    })
-  );
-}
+    return this.http.post(`${this.apiUrl}/login`, model, { responseType: 'text' }).pipe(
+      tap(token => {
+        if (token) {
+          localStorage.setItem('token', token);
+          
+          const tokenData = JSON.parse(atob(token.split('.')[1]));
+          const userId = tokenData.nameid || tokenData['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+          if (userId) {
+            localStorage.setItem('userId', userId.toString());
+          }
+          
+          this.authStatus.next(true);
+        }
+      })
+    );
+  }
 
 isLoggedIn(): boolean {
   return !!localStorage.getItem('token');
@@ -144,8 +151,11 @@ triggerResetSearch() {
   this.resetSearchTrigger.next();
 }
 
-  getCart(userId: number = 1): Observable<any> {
-    return this.http.get(`${this.baseUrl}/Carts/${userId}`).pipe(
+  getCart(userId: number | null = null): Observable<any> {
+    const finalUserId = userId || Number(localStorage.getItem('userId'));
+    if (!finalUserId) return this.http.get(`${this.baseUrl}/Carts/0`);
+
+    return this.http.get(`${this.baseUrl}/Carts/${finalUserId}`).pipe(
       tap((res: any) => {
         const count = res.data?.items?.length || 0;
         this.cartCount.next(count);
@@ -194,8 +204,13 @@ createOrder(orderData: any): Observable<any> {
 }
 
 getOrdersByUserId(userId: number): Observable<any> {
-  return this.http.get<any>(`${this.baseUrl}/Orders/user/${userId}`);
-}
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get<any>(`${this.baseUrl}/Orders/user/${userId}`, { headers });
+  }
+
 
   updateOrderStatus(orderId: number, status: string): Observable<any> {
   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -210,7 +225,7 @@ getOrdersByUserId(userId: number): Observable<any> {
     this.cartCount.next(count);
   }
  
-   clearCart(userId: number): Observable<any> {
+  clearCart(userId: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/Carts/clear/${userId}`);
   }
 

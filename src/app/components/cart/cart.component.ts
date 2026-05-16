@@ -15,9 +15,12 @@ import Swal from 'sweetalert2';
 export class CartComponent implements OnInit {
   public cartData: any = null;
   public isLoading: boolean = false;
+
   private get userId(): number {
-  return Number(localStorage.getItem('userId')) || 1;
-}
+    const id = localStorage.getItem('userId');
+    return id ? Number(id) : 0;
+  }
+
   showPaymentModal: boolean = false;
   currentOrderId: number = 0;
 
@@ -27,8 +30,12 @@ export class CartComponent implements OnInit {
     this.loadCart();
   }
 
-
- loadCart(): void {
+loadCart(): void {
+    if (this.userId === 0) {
+      this.cartData = { items: [], totalPrice: 0 };
+      return;
+    }
+    
     this.isLoading = true;
     this.apiService.getCart(this.userId).subscribe({
       next: (res: any) => {
@@ -38,7 +45,6 @@ export class CartComponent implements OnInit {
           this.cartData = res;
         }
         this.isLoading = false;
-        console.log('კალათის მონაცემები:', this.cartData);
       },
       error: (err) => {
         console.error('შეცდომა ჩატვირთვისას:', err);
