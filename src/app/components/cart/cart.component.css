@@ -885,7 +885,6 @@
     align-items: flex-start !important; /* სწორდება მარცხენა კიდეზე */
     gap: 12px !important;               /* მცირე დაშორება სათაურსა და ღილაკებს შორის */
     margin-bottom: 1.5rem !important;   /* შემცირებული ქვედა მანძილი `mb-5`-დან */
-    padding: 0 4px !important;          /* მცირე გვერდითა პედინგი */
   }
 
   /* სათაურის სექცია */
@@ -918,4 +917,14 @@
     border-radius: 8px !important;
   }
 
+  .shopnet-container{
+  padding-top: 0px !important;
 }
+.col-lg-4{
+  margin-top: 0px !important;
+}
+}
+
+
+
+
