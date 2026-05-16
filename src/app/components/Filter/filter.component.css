@@ -1438,8 +1438,9 @@ transform: scale(1.15);
     padding: 10px 0;
   }
   .cat-btn{
-    font-size: 13px;
-    padding: 10px 15px 10px 15px;
+    font-size: 12px;
+    padding-bottom: 7px;
+    padding-top: 7px;
   }
 }
 
@@ -1463,45 +1464,6 @@ button:focus,
 
 @media(max-width: 570px) {
 
-  
-/* ==========================================================================
-     ONLY SEARCH & SORT BOX MOBILE OPTIMIZATION
-     ========================================================================== */
-
-  /* ძებნისა და სორტირების მშობელი კონტეინერი (Top Bar) */
-  .top-bar {
-    display: flex !important;
-    flex-direction: column !important; /* გვერდიგვერდ ყოფნის ნაცვლად ჯდება ერთმანეთის ქვეშ */
-    gap: 0.5rem !important;            /* მინიმალური დაშორება ძებნასა და სორტირებას შორის */
-    padding: 0 0.5rem !important;      /* გვერდებზე მცირე დაშორება */
-    margin-bottom: 1rem !important;    /* დაშორება ქვედა სექციამდე */
-  }
-
-  /* ძებნის ბლოკი */
-  .search-box {
-    width: 100% !important;            /* გაიშალოს მთელ სიგანეზე */
-  }
-
-  /* ძებნის ინფუთი */
-  .search-box input {
-    width: 100% !important;
-    padding: 0.55rem 0.8rem !important; /* კომპაქტური შიდა დაშორება */
-    font-size: 0.85rem !important;      /* ოდნავ დაპატარავებული შრიფტი */
-    border-radius: 6px !important;     /* დახვეწილი კუთხეები */
-  }
-
-  /* სორტირების ბლოკი */
-  .sort-box {
-    width: 100% !important;            /* გაიშალოს მთელ სიგანეზე */
-  }
-
-  /* სორტირების სელექტი */
-  .sort-box select {
-    width: 100% !important;
-    padding: 0.55rem 0.8rem !important; /* ზუსტად ისეთივე ზომა, როგორც ძებნის ველს */
-    font-size: 0.85rem !important;
-    border-radius: 6px !important;
-  }
 
 
   /* ==========================================================================
@@ -1514,13 +1476,13 @@ button:focus,
     padding: 0.6rem !important;        /* შემცირებული შიდა დაშორება */
     background: #f8f9fa !important;
     border-radius: 8px !important;
-    margin-bottom: 0.8rem !important;  /* მცირე დაშორება შემდეგ ბლოკამდე */
+    margin-bottom: 0.8rem !important; 
   }
 
   /* სათაური „ფასის ფილტრი“ */
   .sidebar h3 {
-    font-size: 0.9rem !important;      /* დაპატარავებული შრიფტი */
-    margin-bottom: 0.4rem !important;  /* მინიმალური დაშორება ინფუთებამდე */
+    font-size: 1.2rem !important;      /* დაპატარავებული შრიფტი */
+    margin-bottom: 0.5rem !important;  /* მინიმალური დაშორება ინფუთებამდე */
     font-weight: 600 !important;
   }
 
@@ -1545,7 +1507,7 @@ button:focus,
     width: 100% !important;
     padding: 0.5rem !important;
     font-size: 0.85rem !important;
-    margin-bottom: 0.25rem !important; /* უკიდურესად მცირე მანძილი გასუფთავების ღილაკამდე */
+    margin-bottom: 0.10rem !important;
   }
 
   /* გასუფთავების ღილაკი */
@@ -1563,31 +1525,110 @@ button:focus,
 
   /* 1. ფასდაკლების ბეიჯი (SALE) - ოდნავ დაპატარავებული */
   .badge {
-    font-size: 0.65rem !important;        /* შემცირებული ფრონტი */
+    font-size: 0.55rem !important;        /* შემცირებული ფრონტი */
     padding: 0.2rem 0.6rem !important; 
   }
 
   /* 2. ნივთი იწურება ბეიჯი (Expires) - ოდნავ დაპატარავებული */
   .low-stock-badge {
-    font-size: 0.65rem !important;       /* შემცირებული ფრონტი */
-    padding: 0.2rem 0.6rem !important; /* კომპაქტური შიდა დაშორება */
+    font-size: 0.55rem !important;       /* შემცირებული ფრონტი */
+    padding: 0.15rem 0.45rem !important; /* კომპაქტური შიდა დაშორება */
   }
 
- .product-description{
+ .product-title{
    font-size: 0.88rem !important;
-   margin-bottom: 10px !important;
+   margin-bottom: 8px !important;
+   margin-top: -2px !important;
  }
  
 .price-row {
-  margin-bottom: 0px !important;
+  margin-bottom: -7px !important;
 }
 
   /* 4. ფასი და ფასდაკლება - ზუსტად ერთი ფრონტით (ზომით) ნაკლები */
   .price {
-    font-size: 0.88rem !important;      
+    font-size: 0.78rem !important;      
   }
 
   .old-price {
-    font-size: 0.8rem !important;        /* 1 ზომით ნაკლები ძველი გადახაზული ფასი */
+    font-size: 0.75rem !important;        /* 1 ზომით ნაკლები ძველი გადახაზული ფასი */
   }
 }
+
+/* ==========================================================================
+     ULTRA-CLEAN SEARCH & SORT SIDE-BY-SIDE FOR MOBILE
+     ========================================================================== */
+
+  /* მშობელი კონტეინერი - სვამს ელემენტებს გვერდიგვერდ მკაცრი პროპორციით */
+  .top-bar {
+    display: grid !important;
+    grid-template-columns: 1.3fr 1fr !important; /* ძებნა ოდნავ უფრო განიერია, ვიდრე სორტირება */
+    gap: 6px !important;                        /* მინიმალური და თანაბარი დაშორება მათ შორის */
+    padding: 0 8px !important;                  /* მცირე დაშორება ეკრანის კიდეებიდან */
+    margin-bottom: 12px !important;             /* დაშორება ქვედა სექციამდე (ქარდებამდე) */
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  /* ძებნის ბლოკის კონტეინერი */
+  .search-box {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* ძებნის ინფუთი */
+  .search-box input {
+    width: 100% !important;
+    height: 38px !important;                    /* ფიქსირებული სიმაღლე იდეალური სიმეტრიისთვის */
+    padding: 0 10px !important;                 /* შიდა დაშორება ტექსტისთვის */
+    font-size: 0.82rem !important;              /* დაპატარავებული ფონტი, მობილურზე რომ კარგად დაეტიოს */
+    background-color: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;       /* ნაზი, თანამედროვე ჩარჩო */
+    border-radius: 8px !important;              /* დახვეწილი მომრგვალება */
+    color: #333333 !important;
+    outline: none !important;
+    transition: all 0.2s ease-in-out !important;
+  }
+
+  /* ძებნის ველზე კლიკის ეფექტი */
+  .search-box input:focus {
+    border-color: #2ecc71 !important;           /* აქცენტირებული მწვანე ფერი ფოკუსისას */
+    box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.1) !important;
+  }
+
+  /* სორტირების ბლოკის კონტეინერი */
+  .sort-box {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* სორტირების სელექტი */
+  .sort-box select {
+    width: 100% !important;
+    height: 38px !important;                    /* ზუსტად იგივე სიმაღლე, რაც ინფუთს */
+    padding: 0 8px !important;                  /* შიდა პედინგი */
+    font-size: 0.82rem !important;              /* ზუსტად იგივე ზომის ფონტი */
+    background-color: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    color: #4a5568 !important;
+    outline: none !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease-in-out !important;
+    /* მობილურის ბრაუზერების სტანდარტული უხეში ისრების ოპტიმიზაცია */
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    /* ლამაზი პატარა ისრის ბექგრაუნდად ჩასმა (სურვილისამებრ) */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 10px center !important;
+    background-size: 14px !important;
+    padding-right: 28px !important;            /* ადგილი ისრისთვის */
+  }
+
+  .sort-box select:focus {
+    border-color: #2ecc71 !important;
+  }
