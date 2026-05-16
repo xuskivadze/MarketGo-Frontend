@@ -1373,13 +1373,12 @@ transform: scale(1.15);
   }
 
   .add-to-cart {
-    width: 100%;
-    padding: 8px 2px;
+    padding: 9px 3px;
     font-size: 0.75rem;
   }
   
   .cat-name {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     margin-bottom: 13px;
   }
 }
@@ -1507,7 +1506,7 @@ button:focus,
     width: 100% !important;
     padding: 0.5rem !important;
     font-size: 0.85rem !important;
-    margin-bottom: 0.10rem !important;
+    margin-bottom: 0rem !important;
   }
 
   /* გასუფთავების ღილაკი */
@@ -1536,7 +1535,7 @@ button:focus,
   }
 
  .product-title{
-   font-size: 0.88rem !important;
+   font-size: 0.78rem !important;
    margin-bottom: 8px !important;
    margin-top: -2px !important;
  }
@@ -1553,12 +1552,9 @@ button:focus,
   .old-price {
     font-size: 0.75rem !important;        /* 1 ზომით ნაკლები ძველი გადახაზული ფასი */
   }
-}
 
-/* ==========================================================================
-     ULTRA-CLEAN SEARCH & SORT SIDE-BY-SIDE FOR MOBILE
-     ========================================================================== */
 
+  
   /* მშობელი კონტეინერი - სვამს ელემენტებს გვერდიგვერდ მკაცრი პროპორციით */
   .top-bar {
     display: grid !important;
@@ -1568,8 +1564,15 @@ button:focus,
     margin-bottom: 12px !important;             /* დაშორება ქვედა სექციამდე (ქარდებამდე) */
     align-items: center !important;
     width: 100% !important;
+    background-color: #F4F9F6;
+    margin-bottom: 20px !important;
   }
 
+  .container{
+    margin-top: -27px !important;
+    padding-top: 15px !important;
+  }
+  
   /* ძებნის ბლოკის კონტეინერი */
   .search-box {
     width: 100% !important;
@@ -1632,3 +1635,6 @@ button:focus,
   .sort-box select:focus {
     border-color: #2ecc71 !important;
   }
+
+}
+
