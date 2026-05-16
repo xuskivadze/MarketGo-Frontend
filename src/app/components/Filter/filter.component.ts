@@ -46,6 +46,13 @@ export class FilterComponent implements OnInit {
   this.applyFilters();
   this.loadLowStockStatus();
 
+  this.apiService.categoryScrollTrigger$.subscribe((catId: number) => {
+      this.filters.categoryId = catId;
+      this.filters.pageIndex = 1;
+      this.applyFilters();
+      this.scrollToProducts();
+    });
+
   this.apiService.salesTrigger$.subscribe(() => {
     this.filters.onlySales = true;
     this.filters.pageIndex = 1;
@@ -115,6 +122,7 @@ export class FilterComponent implements OnInit {
     this.filters.categoryId = id; 
     this.filters.pageIndex = 1; 
     this.applyFilters(); 
+    this.scrollToProducts();
   }
 
   showSales() {

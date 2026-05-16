@@ -1,5 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ApiService } from '../../services/api.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-category-menu',
@@ -21,8 +24,18 @@ export class CategoryMenuComponent {
     { id: 7, name: 'Audio System', icon: 'bi-speaker' }
   ];
 
+  constructor(private apiService: ApiService, private router: Router) {}
+
   selectCategory(id: number) {
     console.log('არჩეული კატეგორია ID:', id);
+    
     this.categoryChanged.emit(id);
+
+    if (this.router.url !== '/filter' && this.router.url !== '/') {
+      this.router.navigate(['/filter'], { fragment: 'products-section' });
+    } else {
+      this.apiService.triggerCategoryScroll(id);
+    }
   }
+
 }

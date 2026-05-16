@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  showPassword = false;
 
   constructor(
     private fb: FormBuilder,
@@ -32,6 +33,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+  
  onLogin() {
     if (this.loginForm.valid) {
       this.apiService.login(this.loginForm.value).subscribe({

@@ -23,6 +23,8 @@ export class ApiService {
   private scrollTrigger = new Subject<void>();
   scrollTrigger$ = this.scrollTrigger.asObservable();
 
+  private categoryScrollTrigger = new Subject<number>();
+  categoryScrollTrigger$ = this.categoryScrollTrigger.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -99,11 +101,15 @@ triggerSalesFilter() {
 triggerSearch(term: string) {
   this.searchTrigger.next(term);
 }
+
+triggerCategoryScroll(categoryId: number) {
+  this.categoryScrollTrigger.next(categoryId);
+}
   
   getCategories(): Observable<any> {
     return this.http.get(`${this.baseUrl}/Categories`);
   }
-
+  
  getProducts(filters: any): Observable<any> {
   let params = new HttpParams();
 

@@ -29,14 +29,29 @@
           </span>
         </div>
 
-        <div class="floating-input mt-4">
-          <input type="password" formControlName="password" required placeholder=" ">
-          <label>პაროლი</label>
-          
-          <span class="error-text" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
-            <i class="bi bi-exclamation-circle"></i> პაროლი აუცილებელია (მინ. 7 სიმბოლო)
-          </span>
-        </div>
+        
+<div class="floating-input mt-4" style="position: relative;">
+  <input 
+    [type]="showPassword ? 'text' : 'password'" 
+    formControlName="password" 
+    required 
+    placeholder=" "
+    style="padding-right: 45px;"
+  >
+  <label>პაროლი</label>
+  
+  <button 
+    type="button" 
+    (click)="togglePasswordVisibility()" 
+    class="toggle-password-btn"
+  >
+    <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+  </button>
+  
+  <span class="error-text" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid">
+    <i class="bi bi-exclamation-circle"></i> პაროლი აუცილებელია (მინ. 7 სიმბოლო)
+  </span>
+</div>
 
         <button type="submit" class="main-submit-btn" [disabled]="loginForm.invalid">
           ავტორიზაცია
